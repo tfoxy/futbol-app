@@ -5,8 +5,9 @@
  *  which are used in several places to keep good readability
  *  of the tasks
  */
+'use strict';
 
-var gutil = require('gulp-util');
+const gutil = require('gulp-util');
 
 /**
  *  The main paths of your project handle these with care
@@ -31,10 +32,8 @@ exports.wiredep = {
 /**
  *  Common implementation for an error handler of a Gulp plugin
  */
-exports.errorHandler = function(title) {
-  'use strict';
-
-  return function(err) {
+exports.errorHandler = (title) => {
+  return (err) => {
     gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
     this.emit('end');
   };

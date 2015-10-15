@@ -1,24 +1,24 @@
 'use strict';
 
-var path = require('path');
-var gulp = require('gulp');
-var conf = require('./conf');
+const path = require('path');
+const gulp = require('gulp');
+const conf = require('./conf');
 
-var $ = require('gulp-load-plugins')();
+const $ = require('gulp-load-plugins')();
 
-var wiredep = require('wiredep').stream;
-var _ = require('lodash');
+const wiredep = require('wiredep').stream;
+const _ = require('lodash');
 
-gulp.task('inject', ['scripts'], function () {
-  var injectStyles = gulp.src([
+gulp.task('inject', ['scripts'], () => {
+  let injectStyles = gulp.src([
     path.join(conf.paths.src, '/app/**/*.css')
-  ], { read: false });
+  ], {read: false});
 
-  var injectScripts = gulp.src([
+  let injectScripts = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/**/*.module.js')
-  ], { read: false });
+  ], {read: false});
 
-  var injectOptions = {
+  let injectOptions = {
     ignorePath: [conf.paths.src, path.join(conf.paths.tmp, '/serve')],
     addRootSlash: false
   };
