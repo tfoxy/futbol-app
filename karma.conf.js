@@ -9,7 +9,7 @@ const _ = require('lodash');
 const wiredep = require('wiredep');
 
 function listFiles() {
-  var wiredepOptions = _.extend({}, conf.wiredep, {
+  let wiredepOptions = _.extend({}, conf.wiredep, {
     dependencies: true,
     devDependencies: true
   });
@@ -23,7 +23,7 @@ function listFiles() {
 
 module.exports = function(config) {
 
-  var configuration = {
+  let configuration = {
     files: listFiles(),
 
     singleRun: true,
@@ -37,14 +37,19 @@ module.exports = function(config) {
 
     logLevel: 'WARN',
 
-    frameworks: ['jasmine'],
+    frameworks: [
+      'mocha',
+      'chai-sinon'
+    ],
 
     browsers: ['PhantomJS'],
 
     plugins: [
       'karma-phantomjs-launcher',
       'karma-coverage',
-      'karma-jasmine',
+      'karma-mocha',
+      'karma-mocha-reporter',
+      'karma-chai-sinon',
       'karma-ng-html2js-preprocessor'
     ],
 
@@ -53,14 +58,14 @@ module.exports = function(config) {
       dir: 'coverage/'
     },
 
-    reporters: ['progress', 'coverage']
+    reporters: ['mocha', 'coverage']
   };
 
-  var preprocessors = {};
-  var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
+  let preprocessors = {};
+  let pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
   preprocessors[pathSrcHtml] = ['ng-html2js'];
 
-  var pathTmpJs = path.join(conf.paths.tmp, '/serve/app/index.module.js');
+  let pathTmpJs = path.join(conf.paths.tmp, '/serve/app/index.module.js');
 
   preprocessors[pathTmpJs] = ['coverage'];
 
