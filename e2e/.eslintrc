@@ -1,9 +1,18 @@
 {
+  "rules": {
+    "angular/angularelement": 0,
+    "angular/no-private-call": 0,
+    "max-nested-callbacks": [2, 8]
+  },
+  "env": {
+    "node": true
+  },
   "globals": {
     "browser": false,
     "element": false,
     "by": false,
     "$": false,
-    "$$": false
+    "$$": false,
+    "protractor": false
   }
 }
