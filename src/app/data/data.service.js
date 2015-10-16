@@ -10,6 +10,13 @@ class DataService {
     });
   }
 
+  standings() {
+    // TODO
+  }
+
+  matchesByTeams() {
+    // TODO
+  }
 
 }
 

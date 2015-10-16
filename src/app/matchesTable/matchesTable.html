@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th ng-repeat="standing in matchesTableCtrl.standings">
+      {{standing.name}}
+    </th>
+  </tr>
+  <tr ng-repeat="rowStanding in matchesTableCtrl.standings"
+      ng-init="rowTeam = rowStanding.team">
+    <th>
+      {{rowStanding.name}}
+    </th>
+    <td ng-repeat="columnStanding in matchesTableCtrl.standings"
+        ng-init="columnTeam = columnStanding.team,
+                 match = matchesTableCtrl.getMatchByTeams(rowTeam, columnTeam)">
+      <span ng-if="rowTeam !== columnTeam">
+        {{matchesTableCtrl.getMatchGoalsByTeam(match, rowTeam)}}
+        -
+        {{matchesTableCtrl.getMatchGoalsByTeam(match, columnTeam)}}
+      </span>
+    </td>
+  </tr>
+</table>
