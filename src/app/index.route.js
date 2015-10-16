@@ -1,4 +1,4 @@
-function routerConfig ($urlRouterProvider) {
+function routerConfig($urlRouterProvider) {
   'ngInject';
   $urlRouterProvider.otherwise('/');
 }

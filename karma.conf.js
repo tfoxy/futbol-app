@@ -16,6 +16,7 @@ function listFiles() {
 
   return wiredep(wiredepOptions).js
     .concat([
+      './node_modules/phantomjs-polyfill/bind-polyfill.js',
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
       path.join(conf.paths.src, '/**/*.html')
     ]);
@@ -39,6 +40,7 @@ module.exports = function(config) {
 
     frameworks: [
       'mocha',
+      'chai-as-promised',
       'chai-sinon'
     ],
 
@@ -49,6 +51,7 @@ module.exports = function(config) {
       'karma-coverage',
       'karma-mocha',
       'karma-mocha-reporter',
+      'karma-chai-as-promised',
       'karma-chai-sinon',
       'karma-ng-html2js-preprocessor'
     ],

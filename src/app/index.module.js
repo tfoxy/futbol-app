@@ -1,5 +1,5 @@
-import config from './index.config';
-import routerConfig from './index.route';
+import config from './index.config.js';
+import routerConfig from './index.route.js';
 
 angular.module('futbolApp', [
   'ui.router'
