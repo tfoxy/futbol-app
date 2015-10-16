@@ -1,0 +1,60 @@
+<table>
+  <tr>
+    <th>
+      <span>Equipo</span>
+    </th>
+    <th>
+      <span>Pts</span>
+    </th>
+    <th>
+      <span>J</span>
+    </th>
+    <th>
+      <span>G</span>
+    </th>
+    <th>
+      <span>E</span>
+    </th>
+    <th>
+      <span>P</span>
+    </th>
+    <th>
+      <span>GF</span>
+    </th>
+    <th>
+      <span>GC</span>
+    </th>
+    <th>
+      <span>+/-</span>
+    </th>
+  </tr>
+  <tr ng-repeat="standing in standingsCtrl.standings">
+    <td>
+      <span>{{::standing.team.name}}</span>
+    </td>
+    <td>
+      <span>{{::standing.points}}</span>
+    </td>
+    <td>
+      <span>{{::standing.matchesWon + standing.matchesDrawn + standing.matchesLost}}</span>
+    </td>
+    <td>
+      <span>{{::standing.matchesWon}}</span>
+    </td>
+    <td>
+      <span>{{::standing.matchesDrawn}}</span>
+    </td>
+    <td>
+      <span>{{::standing.matchesLost}}</span>
+    </td>
+    <td>
+      <span>{{::standing.goalsScored}}</span>
+    </td>
+    <td>
+      <span>{{::standing.goalsAgainst}}</span>
+    </td>
+    <td>
+      <span>{{::standing.goalsScored - standing.goalsAgainst}}</span>
+    </td>
+  </tr>
+</table>
