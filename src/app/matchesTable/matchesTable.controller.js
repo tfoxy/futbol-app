@@ -15,15 +15,15 @@ class MatchesTableController {
   }
 
   getMatchGoalsByTeam(match, team) {
-    if (team === match.localTeam) {
-      return match.localGoals.length;
-    } else if (team === match.visitorTeam) {
-      return match.visitorGoals.length;
+    if (team.id === match.local.team.id) {
+      return match.local.goals.length;
+    } else if (team.id === match.visitor.team.id) {
+      return match.visitor.goals.length;
     }
   }
 
   getMatchByTeams(leftTeam, rightTeam) {
-    // TODO
+    return this._matchesByTeams[leftTeam.id][rightTeam.id];
   }
 }
 
