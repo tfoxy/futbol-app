@@ -26,6 +26,9 @@ class DataService {
 
     this._matchesByTeamsPromise =
       this._lastSeasonPromise.then(generateMatchesByTeams);
+
+    this._teamsPromise =
+      this._lastSeasonPromise.then(generateTeamsById);
   }
 
   getStandings() {
@@ -38,6 +41,10 @@ class DataService {
 
   getDivisionList() {
     return this._lastSeasonPromise.then(season => season.divisions);
+  }
+
+  getTeams() {
+    return this._teamsPromise;
   }
 
 }
@@ -64,6 +71,8 @@ function generateMatchesByTeams(season) {
 
         matchesByTeams[localId][visitorId] = match;
         matchesByTeams[visitorId][localId] = match;
+
+        match.round = round;
       });
     });
   });
@@ -81,4 +90,14 @@ function generateStandingsMap(season) {
   return standingsPerDivisionId;
 }
 
+function generateTeamsById(season) {
+  let teamsById = {};
 
+  season.divisions.forEach(division => {
+    division.teams.forEach(team => {
+      teamsById[team.id] = team;
+    });
+  });
+
+  return teamsById;
+}

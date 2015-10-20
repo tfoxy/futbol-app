@@ -1,0 +1,84 @@
+<div class="page-header">
+  <h1>{{::teamCtrl.team.name}}</h1>
+</div>
+
+<h2>Partidos</h2>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>vs.</th>
+    <th title="Resultado ({{::teamCtrl.team.name}} - oponente)">Res</th>
+    <th title="Amarillas ({{::teamCtrl.team.name}} - oponente)">Am</th>
+    <th title="Rojas ({{::teamCtrl.team.name}} - oponente)">Ro</th>
+    <th title="Jugador del partido">JdP</th>
+    <th title="Número de fecha">#</th>
+    <th>Fecha</th>
+    <th>Cancha</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="match in ::teamCtrl.matchList"
+      ng-init="opponentStats = teamCtrl.getMatchOpponentStats(match);
+               teamStats = teamCtrl.getMatchTeamStats(match)"
+    >
+    <td>
+      <a ui-sref="app.team({teamId: opponentStats.team.id})">
+        {{::opponentStats.team.name}}
+      </a>
+    </td>
+    <td>
+      <span ng-if="::match.hasResults">
+        {{::teamStats.goals.length}}
+        -
+        {{::opponentStats.goals.length}}
+      </span>
+    </td>
+    <td>
+      <span ng-if="::match.hasResults">
+        {{::(teamStats.cards | filter: {type: 'yellow'}).length}}
+        -
+        {{::(opponentStats.cards | filter: {type: 'yellow'}).length}}
+      </span>
+    </td>
+    <td>
+      <span ng-if="::match.hasResults">
+        {{::(teamStats.cards | filter: {type: 'red'}).length}}
+        -
+        {{::(opponentStats.cards | filter: {type: 'red'}).length}}
+      </span>
+    </td>
+    <td>
+      <span ng-if="::match.hasResults"
+            ng-class="::{'text-muted': !teamCtrl.isBestPlayerFromTeam(match)}"
+        >
+        {{::match.bestPlayer.name}}
+      </span>
+    </td>
+    <td>{{::match.round.index}}</td>
+    <td>{{::match.date}}</td>
+    <td>{{::match.field}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Jugadores</h2>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Goles</th>
+    <th title="Jugador del Partido">JdP</th>
+    <th title="Amarillas">Am</th>
+    <th title="Rojas">Ro</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="playerStats in ::teamCtrl.playerList">
+    <td>{{playerStats.player.name}}</td>
+    <td>{{playerStats.goals}}</td>
+    <td>{{playerStats.bestPlayer}}</td>
+    <td>{{playerStats.yellowCards}}</td>
+    <td>{{playerStats.redCards}}</td>
+  </tr>
+  </tbody>
+</table>
