@@ -33,7 +33,7 @@
     border-right: 1px solid #ddd;
   }
 
-  #matches-table tbody > tr:last-child > td, #matches-table tbody > tr:last-child > td {
+  #matches-table tbody > tr:last-child > td, #matches-table tbody > tr:last-child > th {
     border-bottom: 1px solid #ddd;
   }
 }
