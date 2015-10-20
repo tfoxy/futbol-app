@@ -3,7 +3,12 @@ class MatchesTableController {
   static get resolve() {
     return {
       matchesByTeams: ['data', data => data.getMatchesByTeams()],
-      standings: ['data', data => data.getStandings()]
+      standings: ['data', data => data.getStandings()],
+      division: (data, $stateParams) => {
+        'ngInject';
+        return data.getDivisionByIndex($stateParams.divisionIndex);
+      },
+      $title: ['division', division => 'Resultados ' + division.name]
     };
   }
 

@@ -11,6 +11,7 @@ import fixtureModule from './fixture/fixture.module.js';
 
 angular.module('futbolApp', [
   'ui.router',
+  'ui.router.title',
   userDataModule.name,
   divisionListModule.name,
   standingsModule.name,

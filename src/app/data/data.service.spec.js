@@ -115,8 +115,35 @@ describe(dataModule.name + '.service', () => {
 
       $httpBackend.flush();
 
-      expect(data.getStandings()).to.eventually.have.deep.property('7');
-      expect(data.getStandings()).to.eventually.have.deep.property('3');
+      expect(data.getStandings()).to.eventually.have.property('7');
+      expect(data.getStandings()).to.eventually.have.property('3');
+    });
+
+  });
+
+  describe('#getDivisionByIndex', () => {
+
+    it('should return the division with the index', () => {
+      let jsonData = {
+        seasons: [{
+          divisions: [{
+            id: 9,
+            index: 7,
+            rounds: [], teams: []
+          }, {
+            id: 5,
+            index: 3,
+            rounds: [], teams: []
+          }]
+        }]
+      };
+
+      $httpBackend.when('GET', data._path)
+        .respond(jsonData);
+
+      $httpBackend.flush();
+
+      expect(data.getDivisionByIndex(3)).to.eventually.have.property('id', 5);
     });
 
   });

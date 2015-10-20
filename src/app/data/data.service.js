@@ -57,6 +57,14 @@ class DataService {
     });
   }
 
+  getDivisionByIndex(divisionIndex) {
+    return this._lastSeasonPromise.then(season => {
+      return season.divisions.find(division => {
+        return division.index === +divisionIndex;
+      });
+    });
+  }
+
 }
 
 export default DataService;

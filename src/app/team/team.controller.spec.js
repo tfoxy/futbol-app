@@ -12,6 +12,7 @@ describe(teamModule.name + '.controller', () => {
     let $stateParams = {teamId: team.id};
     controller = $controller('TeamController', {
       teams,
+      team,
       matchesByTeams,
       $stateParams
     });

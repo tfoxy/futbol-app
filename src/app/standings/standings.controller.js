@@ -2,7 +2,12 @@ class StandingsController {
 
   static get resolve() {
     return {
-      standings: ['data', data => data.getStandings()]
+      standings: ['data', data => data.getStandings()],
+      division: (data, $stateParams) => {
+        'ngInject';
+        return data.getDivisionByIndex($stateParams.divisionIndex);
+      },
+      $title: ['division', division => 'Posiciones ' + division.name]
     };
   }
 

@@ -3,14 +3,16 @@ class TeamController {
   static get resolve() {
     return {
       teams: ['data', data => data.getTeams()],
-      matchesByTeams: ['data', data => data.getMatchesByTeams()]
+      team: ['teams', '$stateParams', (teams, $stateParams) => teams[$stateParams.teamId]],
+      matchesByTeams: ['data', data => data.getMatchesByTeams()],
+      $title: ['team', team => team.name]
     };
   }
 
-  constructor(teams, $stateParams, matchesByTeams) {
+  constructor(team, matchesByTeams) {
     'ngInject';
 
-    this.team = teams[$stateParams.teamId];
+    this.team = team;
     this.matchList = this._getMatchList(matchesByTeams);
     this.playerList = this._getPlayerList();
   }

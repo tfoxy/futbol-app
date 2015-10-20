@@ -2,14 +2,18 @@ class FixtureController {
 
   static get resolve() {
     return {
-      divisionsByIndex: ['data', data => data.getDivisionsByIndex()]
+      division: (data, $stateParams) => {
+        'ngInject';
+        return data.getDivisionByIndex($stateParams.divisionIndex);
+      },
+      $title: ['division', division => 'Fixture ' + division.name]
     };
   }
 
-  constructor(divisionsByIndex, $stateParams, userData) {
+  constructor(division, $stateParams, userData) {
     'ngInject';
 
-    this.division = divisionsByIndex[$stateParams.divisionIndex];
+    this.division = division;
 
     // Sync userData.divisionIndex
     userData.divisionIndex = +$stateParams.divisionIndex;
