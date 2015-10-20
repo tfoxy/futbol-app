@@ -7,11 +7,14 @@ class MatchesTableController {
     };
   }
 
-  constructor(matchesByTeams, standings) {
+  constructor(matchesByTeams, standings, $stateParams, userData) {
     'ngInject';
 
     this._matchesByTeams = matchesByTeams;
-    this.standings = standings;
+    this.standings = standings[$stateParams.divisionIndex];
+
+    // Sync userData.divisionIndex
+    userData.divisionIndex = +$stateParams.divisionIndex;
   }
 
   getMatchGoalsByTeam(match, team) {

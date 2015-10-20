@@ -5,10 +5,44 @@
   padding: 0.2em 0;
 }
 
-.thumbnail {
-  height: 200px;
+.table-header-rotated > thead > tr, .table-header-rotated {
+  border: none;
 }
 
-.thumbnail img.pull-right {
-  width: 50px;
+.table-header-rotated > thead > tr > th {
+  height: 100px;
+  width: 40px;
+  padding: 0;
+  border: none;
+}
+
+.table-header-rotated thead th > div {
+  position: relative;
+  height: 100%;
+  top: 0;
+  /* 100 * tan(45) / 2 = 40 where 100 is the height on the cell and 45 is the transform angle */
+  left: 50px;
+  -ms-transform:skew(-45deg,0deg);
+  -moz-transform:skew(-45deg,0deg);
+  -webkit-transform:skew(-45deg,0deg);
+  -o-transform:skew(-45deg,0deg);
+  transform:skew(-45deg,0deg);
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.table-header-rotated thead th span {
+  -ms-transform: skew(45deg, 0deg) rotate(315deg);
+  -moz-transform: skew(45deg, 0deg) rotate(315deg);
+  -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+  -o-transform: skew(45deg, 0deg) rotate(315deg);
+  transform: skew(45deg, 0deg) rotate(315deg);
+  position: absolute;
+  /* 50 cos(45) = 35 with an additional 2px margin*/
+  bottom: 37px;
+  /* Because it looked good, but there is probably a mathematical link here as well */
+  left: -40px;
+  /* 100 / cos(45) - 40 cos (45) = 85 where 80 is the height of the cell, 40 the width of the cell and 45 the transform angle*/
+  width: 113px;
+  white-space: nowrap;
 }

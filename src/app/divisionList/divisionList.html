@@ -1,0 +1,5 @@
+<li ng-repeat="division in divisionListCtrl.list"
+    ng-class="{active: division.index === divisionListCtrl.userData.divisionIndex}"
+  >
+  <a ng-href="{{divisionListCtrl.divisionHref(division.index)}}">{{division.name}}</a>
+</li>

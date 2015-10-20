@@ -6,10 +6,13 @@ class StandingsController {
     };
   }
 
-  constructor(standings) {
+  constructor(standings, $stateParams, userData) {
     'ngInject';
 
-    this.standings = standings;
+    this.standings = standings[$stateParams.divisionIndex];
+
+    // Sync userData.divisionIndex
+    userData.divisionIndex = +$stateParams.divisionIndex;
   }
 }
 

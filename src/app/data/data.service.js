@@ -36,6 +36,10 @@ class DataService {
     return this._matchesByTeamsPromise;
   }
 
+  getDivisionList() {
+    return this._lastSeasonPromise.then(season => season.divisions);
+  }
+
 }
 
 export default DataService;
@@ -71,7 +75,7 @@ function generateStandingsMap(season) {
   let standingsPerDivisionId = {};
 
   season.divisions.forEach(division => {
-    standingsPerDivisionId[division.id] = standingsCalculator(division);
+    standingsPerDivisionId[division.index] = standingsCalculator(division);
   });
 
   return standingsPerDivisionId;

@@ -71,10 +71,10 @@ describe(dataModule.name + '.service', () => {
       let jsonData = {
         seasons: [{
           divisions: [{
-            id: 7,
+            index: 7,
             rounds: [], teams: []
           }, {
-            id: 3,
+            index: 3,
             rounds: [], teams: []
           }]
         }]
