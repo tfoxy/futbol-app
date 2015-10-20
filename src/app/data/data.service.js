@@ -47,6 +47,16 @@ class DataService {
     return this._teamsPromise;
   }
 
+  getDivisionsByIndex() {
+    return this._lastSeasonPromise.then(season => {
+      let divisionsByIndex = {};
+      season.divisions.forEach(division => {
+        divisionsByIndex[division.index] = division;
+      });
+      return divisionsByIndex;
+    });
+  }
+
 }
 
 export default DataService;
@@ -81,13 +91,13 @@ function generateMatchesByTeams(season) {
 }
 
 function generateStandingsMap(season) {
-  let standingsPerDivisionId = {};
+  let standingsPerDivisionIndex = {};
 
   season.divisions.forEach(division => {
-    standingsPerDivisionId[division.index] = standingsCalculator(division);
+    standingsPerDivisionIndex[division.index] = standingsCalculator(division);
   });
 
-  return standingsPerDivisionId;
+  return standingsPerDivisionIndex;
 }
 
 function generateTeamsById(season) {
