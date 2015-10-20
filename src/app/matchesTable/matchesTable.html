@@ -15,7 +15,7 @@
           ng-init="rowTeam = rowStanding.team">
         <th>
           <span title="{{::rowTeam.name.length > 17 ? rowTeam.name : ''}}">
-            <a ui-sref="::app.team({teamId: rowStanding.team.id})">
+            <a ui-sref="app.team({teamId: rowTeam.id})">
               {{::rowTeam.name.length > 17 ? (rowTeam.name | limitTo: 16) + '&hellip;' : rowTeam.name}}
             </a>
           </span>
