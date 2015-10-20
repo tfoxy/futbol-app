@@ -3,63 +3,70 @@
 </div>
 
 <h2>Partidos</h2>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>vs.</th>
-    <th title="Resultado ({{::teamCtrl.team.name}} - oponente)">Res</th>
-    <th title="Amarillas ({{::teamCtrl.team.name}} - oponente)">Am</th>
-    <th title="Rojas ({{::teamCtrl.team.name}} - oponente)">Ro</th>
-    <th title="Jugador del partido">JdP</th>
-    <th title="Número de fecha">#</th>
-    <th>Fecha</th>
-    <th>Cancha</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="match in ::teamCtrl.matchList"
-      ng-init="opponentStats = teamCtrl.getMatchOpponentStats(match);
-               teamStats = teamCtrl.getMatchTeamStats(match)"
-    >
-    <td>
-      <a ui-sref="app.team({teamId: opponentStats.team.id})">
-        {{::opponentStats.team.name}}
-      </a>
-    </td>
-    <td>
-      <span ng-if="::match.hasResults">
-        {{::teamStats.goals.length}}
-        -
-        {{::opponentStats.goals.length}}
-      </span>
-    </td>
-    <td>
-      <span ng-if="::match.hasResults">
-        {{::(teamStats.cards | filter: {type: 'yellow'}).length}}
-        -
-        {{::(opponentStats.cards | filter: {type: 'yellow'}).length}}
-      </span>
-    </td>
-    <td>
-      <span ng-if="::match.hasResults">
-        {{::(teamStats.cards | filter: {type: 'red'}).length}}
-        -
-        {{::(opponentStats.cards | filter: {type: 'red'}).length}}
-      </span>
-    </td>
-    <td>
-      <span ng-if="::match.hasResults"
-            ng-class="::{'text-muted': !teamCtrl.isBestPlayerFromTeam(match)}"
-        >
-        {{::match.bestPlayer.name}}
-      </span>
-    </td>
-    <td>{{::match.round.index}}</td>
-    <td>{{::match.date}}</td>
-    <td>{{::match.field}}</td>
-  </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>vs.</th>
+      <th title="Resultado ({{::teamCtrl.team.name}} - oponente)">Res</th>
+      <th title="Amarillas ({{::teamCtrl.team.name}} - oponente)">Am</th>
+      <th title="Rojas ({{::teamCtrl.team.name}} - oponente)">Ro</th>
+      <th title="Jugador del partido">JdP</th>
+      <th title="Número de fecha">#</th>
+      <th>Fecha</th>
+      <th>Cancha</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="match in ::teamCtrl.matchList"
+        ng-init="opponentStats = teamCtrl.getMatchOpponentStats(match);
+                 teamStats = teamCtrl.getMatchTeamStats(match);
+                 opponentTeam = opponentStats.team;
+                 bestPlayer = match.bestPlayer"
+      >
+      <td>
+        <a ui-sref="app.team({teamId: opponentTeam.id})"
+           title="{{::opponentTeam.name.length > 17 ? opponentTeam.name : ''}}"
+          >
+          {{::opponentTeam.name.length > 17 ? (opponentTeam.name | limitTo: 16) + '&hellip;' : opponentTeam.name}}
+        </a>
+      </td>
+      <td>
+        <span ng-if="::match.hasResults">
+          {{::teamStats.goals.length}}
+          -
+          {{::opponentStats.goals.length}}
+        </span>
+      </td>
+      <td>
+        <span ng-if="::match.hasResults">
+          {{::(teamStats.cards | filter: {type: 'yellow'}).length}}
+          -
+          {{::(opponentStats.cards | filter: {type: 'yellow'}).length}}
+        </span>
+      </td>
+      <td>
+        <span ng-if="::match.hasResults">
+          {{::(teamStats.cards | filter: {type: 'red'}).length}}
+          -
+          {{::(opponentStats.cards | filter: {type: 'red'}).length}}
+        </span>
+      </td>
+      <td>
+        <span ng-if="::match.hasResults"
+              ng-class="::{'text-muted': !teamCtrl.isBestPlayerFromTeam(match)}"
+              title="{{::bestPlayer.name.length > 17 ? bestPlayer.name : ''}}"
+          >
+          {{::bestPlayer.name.length > 17 ? (bestPlayer.name | limitTo: 16) + '&hellip;' : bestPlayer.name}}
+        </span>
+      </td>
+      <td>{{::match.round.index}}</td>
+      <td>{{::match.date}}</td>
+      <td>{{::match.field}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
 <h2>Jugadores ({{::teamCtrl.playerList.length}})</h2>
 <table class="table table-striped">
