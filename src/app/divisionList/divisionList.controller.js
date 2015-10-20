@@ -17,6 +17,10 @@ class DivisionListController {
   divisionHref(divisionIndex) {
     return this.$state.href(this.$state.current.name, {divisionIndex});
   }
+
+  stateHasDivisionIndexParam() {
+    return 'divisionIndex' in this.$state.params;
+  }
 }
 
 export default DivisionListController;

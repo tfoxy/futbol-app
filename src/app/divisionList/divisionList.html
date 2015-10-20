@@ -1,5 +1,7 @@
-<li ng-repeat="division in divisionListCtrl.list"
-    ng-class="{active: division.index === divisionListCtrl.userData.divisionIndex}"
-  >
-  <a ng-href="{{divisionListCtrl.divisionHref(division.index)}}">{{division.name}}</a>
-</li>
+<ul class="nav navbar-nav navbar-right" ng-show="divisionListCtrl.stateHasDivisionIndexParam()">
+  <li ng-repeat="division in divisionListCtrl.list"
+      ng-class="{active: division.index === divisionListCtrl.userData.divisionIndex}"
+    >
+    <a ng-href="{{divisionListCtrl.divisionHref(division.index)}}">{{division.name}}</a>
+  </li>
+</ul>
