@@ -6,7 +6,7 @@
           <!-- Top left cell -->
         </th>
         <th ng-repeat="standing in ::matchesTableCtrl.standings">
-          <div><span>{{::standing.team.name}}</span></div>
+          <div><span><a ui-sref="app.team({teamId: standing.team.id})">{{::standing.team.name}}</a></span></div>
         </th>
       </tr>
     </thead>
@@ -14,7 +14,7 @@
       <tr ng-repeat="rowStanding in ::matchesTableCtrl.standings"
           ng-init="rowTeam = rowStanding.team">
         <th>
-          <span>{{::rowStanding.team.name}}</span>
+          <span><a ui-sref="app.team({teamId: rowStanding.team.id})">{{::rowStanding.team.name}}</a></span>
         </th>
         <td ng-repeat="columnStanding in ::matchesTableCtrl.standings"
             ng-init="columnTeam = columnStanding.team;

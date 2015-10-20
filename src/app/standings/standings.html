@@ -33,7 +33,7 @@
   <tbody>
     <tr ng-repeat="standing in ::standingsCtrl.standings">
       <td>
-        <span>{{::standing.team.name}}</span>
+        <a ui-sref="app.team({teamId: standing.team.id})">{{::standing.team.name}}</a>
       </td>
       <td>
         <span>{{::standing.points}}</span>
