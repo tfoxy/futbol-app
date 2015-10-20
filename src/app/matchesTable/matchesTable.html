@@ -14,7 +14,9 @@
       <tr ng-repeat="rowStanding in ::matchesTableCtrl.standings"
           ng-init="rowTeam = rowStanding.team">
         <th>
-          <span><a ui-sref="app.team({teamId: rowStanding.team.id})">{{::rowStanding.team.name}}</a></span>
+          <span><a ui-sref="app.team({teamId: rowStanding.team.id})">
+            {{::rowTeam.name.length > 17 ? (rowTeam.name | limitTo: 16) : rowTeam.name}}{{::rowTeam.name.length > 17 ? '&hellip;' : ''}}
+          </a></span>
         </th>
         <td ng-repeat="columnStanding in ::matchesTableCtrl.standings"
             ng-init="columnTeam = columnStanding.team;
