@@ -60,7 +60,11 @@
           {{::bestPlayer.name.length > 17 ? (bestPlayer.name | limitTo: 16) + '&hellip;' : bestPlayer.name}}
         </span>
       </td>
-      <td>{{::match.round.index}}</td>
+      <td>
+        <a ui-sref="app.fixture({divisionIndex:match.round.division.index, '#': 'round' + match.round.index})">
+          {{::match.round.index}}
+        </a>
+      </td>
       <td>{{::match.date}}</td>
       <td>{{::match.field}}</td>
     </tr>

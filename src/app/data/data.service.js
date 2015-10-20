@@ -92,6 +92,8 @@ function generateMatchesByTeams(season) {
 
         match.round = round;
       });
+
+      round.division = division;
     });
   });
 

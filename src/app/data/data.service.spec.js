@@ -93,6 +93,37 @@ describe(dataModule.name + '.service', () => {
       expect(data.getMatchesByTeams()).to.eventually.have.deep.property('[1][2].round.id', 4);
     });
 
+    it('should add division property to rounds', () => {
+      let match = {
+        id: 3,
+        local: {
+          team: {id: 1}
+        },
+        visitor: {
+          team: {id: 2}
+        }
+      };
+      let jsonData = {
+        seasons: [{
+          divisions: [{
+            id: 7,
+            rounds: [{
+              id: 4,
+              matches: [match]
+            }],
+            teams: [{id: 1}, {id: 2}]
+          }]
+        }]
+      };
+
+      $httpBackend.when('GET', data._path)
+        .respond(jsonData);
+
+      $httpBackend.flush();
+
+      expect(data.getMatchesByTeams()).to.eventually.have.deep.property('[1][2].round.division.id', 7);
+    });
+
   });
 
   describe('#getStandings', () => {
