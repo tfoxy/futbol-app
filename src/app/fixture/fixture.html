@@ -6,10 +6,14 @@
   </thead>
   <tbody ng-repeat-end>
   <tr ng-repeat="match in ::round.matches">
-    <td class="col-sm-3 text-right">{{match.local.team.name}}</td>
+    <td class="col-sm-3 text-right">
+      <a ui-sref="app.team({teamId: match.local.team.id})">{{match.local.team.name}}</a>
+    </td>
     <td class="col-sm-1 text-center">{{match.local.goals.length+'' || '-'}}</td>
     <td class="col-sm-1 text-center">{{match.visitor.goals.length+'' || '-'}}</td>
-    <td class="col-sm-3">{{match.visitor.team.name}}</td>
+    <td class="col-sm-3">
+      <a ui-sref="app.team({teamId: match.visitor.team.id})">{{match.visitor.team.name}}</a>
+    </td>
     <td class="col-sm-3 text-center">{{match.date}}</td>
     <td class="col-sm-1 text-center">{{match.field}}</td>
   </tr>
