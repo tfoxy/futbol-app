@@ -5,6 +5,7 @@ import standingsRouteConfig from './standings.route.js';
 
 const module = angular.module('futbolApp.standings', [
   'ui.router',
+  'tableSort',
   dataModule.name,
   userDataModule.name
 ])

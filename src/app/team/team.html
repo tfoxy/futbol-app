@@ -9,8 +9,8 @@
     <tr>
       <th>vs.</th>
       <th title="Resultado ({{::teamCtrl.team.name}} - oponente)">Res</th>
-      <th title="Amarillas ({{::teamCtrl.team.name}} - oponente)">Am</th>
-      <th title="Rojas ({{::teamCtrl.team.name}} - oponente)">Ro</th>
+      <th title="Tarjetas Amarillas ({{::teamCtrl.team.name}} - oponente)">TA</th>
+      <th title="Tarjetas Rojas ({{::teamCtrl.team.name}} - oponente)">TR</th>
       <th title="Jugador del partido">JdP</th>
       <th title="Número de fecha">#</th>
       <th>Fecha</th>
@@ -73,18 +73,18 @@
 </div>
 
 <h2>Jugadores ({{::teamCtrl.playerList.length}})</h2>
-<table class="table table-striped">
+<table class="table table-striped" ts-wrapper>
   <thead>
   <tr>
-    <th>Nombre</th>
-    <th>Goles</th>
-    <th title="Jugador del Partido">JdP</th>
-    <th title="Amarillas">Am</th>
-    <th title="Rojas">Ro</th>
+    <th ts-criteria="player.name">Nombre</th>
+    <th ts-criteria="goals" ts-default="descending">Goles</th>
+    <th ts-criteria="bestPlayer" ts-default="descending" title="Jugador del Partido">JdP</th>
+    <th ts-criteria="yellowCards" ts-default="descending" title="Tarjetas Amarillas">TA</th>
+    <th ts-criteria="redCards" ts-default="descending" title="Tarjetas Rojas">TR</th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="playerStats in ::teamCtrl.playerList">
+  <tr ng-repeat="playerStats in teamCtrl.playerList track by playerStats.player.id" ts-repeat>
     <td>{{playerStats.player.name}}</td>
     <td>{{playerStats.goals}}</td>
     <td>{{playerStats.bestPlayer}}</td>

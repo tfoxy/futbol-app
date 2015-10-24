@@ -7,12 +7,20 @@ function standingsCalculator(divisionData) {
   teams.forEach(team => {
     let standing = {
       team: team,
-      points: 0,
+      get points() {
+        return 3 * this.matchesWon + this.matchesDrawn;
+      },
+      get matchesPlayed() {
+        return this.matchesWon + this.matchesDrawn + this.matchesLost;
+      },
       matchesWon: 0,
       matchesDrawn: 0,
       matchesLost: 0,
       goalsScored: 0,
-      goalsAgainst: 0
+      goalsAgainst: 0,
+      get goalsDifference() {
+        return this.goalsScored - this.goalsAgainst;
+      }
     };
     standings.push(standing);
     standingsById[team.id] = standing;
@@ -29,16 +37,12 @@ function standingsCalculator(divisionData) {
       let diffGoals = match.visitor.goals.length - match.local.goals.length;
 
       if (diffGoals < 0) {
-        localStanding.points += 3;
         localStanding.matchesWon++;
         visitorStanding.matchesLost++;
       } else if (diffGoals > 0) {
-        visitorStanding.points += 3;
         visitorStanding.matchesWon++;
         localStanding.matchesLost++;
       } else {
-        localStanding.points += 1;
-        visitorStanding.points += 1;
         localStanding.matchesDrawn++;
         visitorStanding.matchesDrawn++;
       }

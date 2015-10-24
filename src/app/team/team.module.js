@@ -4,6 +4,7 @@ import teamRouteConfig from './team.route.js';
 
 const module = angular.module('futbolApp.team', [
   'ui.router',
+  'tableSort',
   dataModule.name
 ])
   .config(teamRouteConfig)

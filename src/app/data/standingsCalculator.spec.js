@@ -299,4 +299,66 @@ describe(dataModule.name + '.standingsCalculator', () => {
     expect(standings).to.have.length(0);
   });
 
+  it('should sum all played matches in matchesPlayed property', () => {
+    let standings = standingsCalculator({
+      rounds: [{
+        matches: [{
+          hasResults: true,
+          local: {
+            team: {id: 3},
+            goals: [1]
+          },
+          visitor: {
+            team: {id: 4},
+            goals: []
+          }
+        }, {
+          hasResults: true,
+          local: {
+            team: {id: 3},
+            goals: []
+          },
+          visitor: {
+            team: {id: 5},
+            goals: []
+          }
+        }, {
+          hasResults: true,
+          local: {
+            team: {id: 3},
+            goals: []
+          },
+          visitor: {
+            team: {id: 4},
+            goals: [1]
+          }
+        }]
+      }],
+      teams: [{id: 3}, {id: 4}, {id: 5}]
+    });
+
+    expect(standings[0]).to.have.property('matchesPlayed', 3);
+  });
+
+  it('should have the goals difference in goalsDifference property', () => {
+    let standings = standingsCalculator({
+      rounds: [{
+        matches: [{
+          hasResults: true,
+          local: {
+            team: {id: 3},
+            goals: new Array(3)
+          },
+          visitor: {
+            team: {id: 4},
+            goals: new Array(5)
+          }
+        }]
+      }],
+      teams: [{id: 3}, {id: 4}]
+    });
+
+    expect(standings[0]).to.have.property('goalsDifference', -2);
+  });
+
 });

@@ -1,37 +1,39 @@
-<table class="table table-striped">
+<table class="table table-striped" ts-wrapper>
   <thead>
     <tr>
-      <th>
+      <th ts-criteria="team.name">
         <span>Equipo</span>
       </th>
-      <th>
-        <span title="Puntos">Pts</span>
+      <th ts-criteria="points" ts-default="descending" title="Puntos">
+        Pts
       </th>
-      <th>
-        <span title="Partidos Jugados">J</span>
+      <th ts-criteria="matchesPlayed" title="Partidos Jugados">
+        PJ
       </th>
-      <th>
-        <span title="Partidos Ganados">G</span>
+      <th ts-criteria="matchesWon" title="Partidos Ganados">
+        PG
       </th>
-      <th>
-        <span title="Partidos Empatados">E</span>
+      <th ts-criteria="matchesDrawn" title="Partidos Empatados">
+        PE
       </th>
-      <th>
-        <span title="Partidos Perdidos">P</span>
+      <th ts-criteria="matchesLost" title="Partidos Perdidos">
+        PP
       </th>
-      <th>
-        <span title="Goles a Favor">GF</span>
+      <th ts-criteria="goalsScored" ts-default="descending" title="Goles a Favor">
+        GF
       </th>
-      <th>
-        <span title="Goles en Contra">GC</span>
+      <th ts-criteria="goalsAgainst" title="Goles en Contra">
+        GC
       </th>
-      <th>
-        <span title="Diferencia de goles">+/-</span>
+      <th ts-criteria="goalsDifference" ts-default="descending" title="Diferencia de goles">
+        +/-
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="standing in ::standingsCtrl.standings">
+    <tr ng-repeat="standing in standingsCtrl.standings track by standing.team.id"
+        ts-repeat
+      >
       <td>
         <a ui-sref="app.team({teamId: standing.team.id})">{{::standing.team.name}}</a>
       </td>
@@ -39,7 +41,7 @@
         <span>{{::standing.points}}</span>
       </td>
       <td>
-        <span>{{::standing.matchesWon + standing.matchesDrawn + standing.matchesLost}}</span>
+        <span>{{::standing.matchesPlayed}}</span>
       </td>
       <td>
         <span>{{::standing.matchesWon}}</span>
@@ -57,7 +59,7 @@
         <span>{{::standing.goalsAgainst}}</span>
       </td>
       <td>
-        <span>{{::standing.goalsScored - standing.goalsAgainst}}</span>
+        <span>{{::standing.goalsDifference}}</span>
       </td>
     </tr>
   </tbody>
