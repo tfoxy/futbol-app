@@ -1,5 +1,6 @@
-<table class="table table-striped" ts-wrapper>
-  <thead>
+<section id="standings-view">
+  <table class="table table-striped" ts-wrapper>
+    <thead>
     <tr>
       <th ts-criteria="team.name">
         <span>Equipo</span>
@@ -29,8 +30,8 @@
         +/-
       </th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr ng-repeat="standing in standingsCtrl.standings track by standing.team.id"
         ts-repeat
       >
@@ -62,5 +63,6 @@
         <span>{{::standing.goalsDifference}}</span>
       </td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</section>

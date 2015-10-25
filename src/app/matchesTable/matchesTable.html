@@ -1,6 +1,7 @@
-<div id="matches-table" class="table-responsive">
-  <table class="table table-bordered table-striped table-condensed table-header-rotated">
-    <thead>
+<section id="matches-table-view">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-condensed table-header-rotated">
+      <thead>
       <tr>
         <th>
           <!-- Top left cell -->
@@ -9,8 +10,8 @@
           <div><span><a ui-sref="app.team({teamId: standing.team.id})">{{::standing.team.name}}</a></span></div>
         </th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr ng-repeat="rowStanding in ::matchesTableCtrl.standings"
           ng-init="rowTeam = rowStanding.team">
         <th>
@@ -32,6 +33,7 @@
           </span>
         </td>
       </tr>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
+</section>

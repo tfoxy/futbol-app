@@ -1,22 +1,23 @@
-<table class="table table-striped">
-  <thead ng-repeat-start="round in ::fixtureCtrl.division.rounds">
-  <tr id="round{{round.index}}">
-    <th colspan="6"><h4>Fecha {{round.index}}</h4></th>
-  </tr>
-  </thead>
-  <tbody ng-repeat-end>
-  <tr ng-repeat="match in ::round.matches">
-    <td class="col-sm-3 text-right">
-      <a ui-sref="app.team({teamId: match.local.team.id})">{{match.local.team.name}}</a>
-    </td>
-    <td class="col-sm-1 text-center">{{match.local.goals.length+'' || '-'}}</td>
-    <td class="col-sm-1 text-center">{{match.visitor.goals.length+'' || '-'}}</td>
-    <td class="col-sm-3">
-      <a ui-sref="app.team({teamId: match.visitor.team.id})">{{match.visitor.team.name}}</a>
-    </td>
-    <td class="col-sm-3 text-center">{{match.date}}</td>
-    <td class="col-sm-1 text-center">{{match.field}}</td>
-  </tr>
-  </tbody>
-</table>
-</div>
+<section id="fixture-view">
+  <table class="table table-striped">
+    <thead ng-repeat-start="round in ::fixtureCtrl.division.rounds">
+    <tr id="round{{round.index}}">
+      <th colspan="6"><h4>Fecha {{round.index}}</h4></th>
+    </tr>
+    </thead>
+    <tbody ng-repeat-end>
+    <tr ng-repeat="match in ::round.matches">
+      <td class="col-sm-3 text-right">
+        <a ui-sref="app.team({teamId: match.local.team.id})">{{match.local.team.name}}</a>
+      </td>
+      <td class="col-sm-1 text-center">{{match.local.goals.length+'' || '-'}}</td>
+      <td class="col-sm-1 text-center">{{match.visitor.goals.length+'' || '-'}}</td>
+      <td class="col-sm-3">
+        <a ui-sref="app.team({teamId: match.visitor.team.id})">{{match.visitor.team.name}}</a>
+      </td>
+      <td class="col-sm-3 text-center"><time>{{match.date}}</time></td>
+      <td class="col-sm-1 text-center">{{match.field}}</td>
+    </tr>
+    </tbody>
+  </table>
+</section>

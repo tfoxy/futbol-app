@@ -1,39 +1,39 @@
-#matches-table.table-responsive {
+#matches-table-view .table-responsive {
   overflow-x: hidden;
   overflow-y: inherit;
   border: none;
 }
 
-#matches-table table tbody th {
+#matches-table-view table tbody th {
   white-space: nowrap;
 }
 
-#matches-table tbody > tr > td {
+#matches-table-view tbody > tr > td {
   text-align: center;
 }
 
-#matches-table tbody > tr > td:last-child {
+#matches-table-view tbody > tr > td:last-child {
   border-right: 2px solid #ddd;
 }
 
-#matches-table .strike-through {
+#matches-table-view .strike-through {
   background-color: #eaeaea;
 }
 
 @media screen and (max-width: 767px) {
-  #matches-table.table-responsive {
+  #matches-table-view .table-responsive {
     overflow-x: inherit;
   }
 
-  #matches-table tbody > tr > th:first-child {
+  #matches-table-view tbody > tr > th:first-child {
     border-left: 1px solid #ddd;
   }
 
-  #matches-table tbody > tr > td:last-child {
+  #matches-table-view tbody > tr > td:last-child {
     border-right: 1px solid #ddd;
   }
 
-  #matches-table tbody > tr:last-child > td, #matches-table tbody > tr:last-child > th {
+  #matches-table-view tbody > tr:last-child > td, #matches-table-view tbody > tr:last-child > th {
     border-bottom: 1px solid #ddd;
   }
 }

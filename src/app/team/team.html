@@ -1,95 +1,101 @@
-<div class="page-header">
-  <h1>{{::teamCtrl.team.name}}</h1>
-</div>
+<section id="team-view">
+  <header class="page-header">
+    <h1>{{::teamCtrl.team.name}}</h1>
+  </header>
 
-<h2>Partidos</h2>
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>vs.</th>
-      <th title="Resultado ({{::teamCtrl.team.name}} - oponente)">Res</th>
-      <th title="Tarjetas Amarillas ({{::teamCtrl.team.name}} - oponente)">TA</th>
-      <th title="Tarjetas Rojas ({{::teamCtrl.team.name}} - oponente)">TR</th>
-      <th title="Jugador del partido">JdP</th>
-      <th title="Número de fecha">#</th>
-      <th>Fecha</th>
-      <th>Cancha</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="match in ::teamCtrl.matchList"
-        ng-init="opponentStats = teamCtrl.getMatchOpponentStats(match);
-                 teamStats = teamCtrl.getMatchTeamStats(match);
-                 opponentTeam = opponentStats.team;
-                 bestPlayer = match.bestPlayer"
-      >
-      <td>
-        <a ui-sref="app.team({teamId: opponentTeam.id})"
-           title="{{::opponentTeam.name.length > 17 ? opponentTeam.name : ''}}"
+  <section>
+    <h2>Partidos</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>vs.</th>
+          <th title="Resultado ({{::teamCtrl.team.name}} - oponente)">Res</th>
+          <th title="Tarjetas Amarillas ({{::teamCtrl.team.name}} - oponente)">TA</th>
+          <th title="Tarjetas Rojas ({{::teamCtrl.team.name}} - oponente)">TR</th>
+          <th title="Jugador del partido">JdP</th>
+          <th title="Número de fecha">#</th>
+          <th>Fecha</th>
+          <th>Cancha</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="match in ::teamCtrl.matchList"
+            ng-init="opponentStats = teamCtrl.getMatchOpponentStats(match);
+                   teamStats = teamCtrl.getMatchTeamStats(match);
+                   opponentTeam = opponentStats.team;
+                   bestPlayer = match.bestPlayer"
           >
-          {{::opponentTeam.name.length > 17 ? (opponentTeam.name | limitTo: 16) + '&hellip;' : opponentTeam.name}}
-        </a>
-      </td>
-      <td>
-        <span ng-if="::match.hasResults">
-          {{::teamStats.goals.length}}
-          -
-          {{::opponentStats.goals.length}}
-        </span>
-      </td>
-      <td>
-        <span ng-if="::match.hasResults">
-          {{::(teamStats.cards | filter: {type: 'yellow'}).length}}
-          -
-          {{::(opponentStats.cards | filter: {type: 'yellow'}).length}}
-        </span>
-      </td>
-      <td>
-        <span ng-if="::match.hasResults">
-          {{::(teamStats.cards | filter: {type: 'red'}).length}}
-          -
-          {{::(opponentStats.cards | filter: {type: 'red'}).length}}
-        </span>
-      </td>
-      <td>
-        <span ng-if="::match.hasResults"
-              ng-class="::{'text-muted': !teamCtrl.isBestPlayerFromTeam(match)}"
-              title="{{::bestPlayer.name.length > 17 ? bestPlayer.name : ''}}"
-          >
-          {{::bestPlayer.name.length > 17 ? (bestPlayer.name | limitTo: 16) + '&hellip;' : bestPlayer.name}}
-        </span>
-      </td>
-      <td>
-        <a ui-sref="app.fixture({divisionIndex:match.round.division.index, '#': 'round' + match.round.index})">
-          {{::match.round.index}}
-        </a>
-      </td>
-      <td>{{::match.date}}</td>
-      <td>{{::match.field}}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+          <td>
+            <a ui-sref="app.team({teamId: opponentTeam.id})"
+               title="{{::opponentTeam.name.length > 17 ? opponentTeam.name : ''}}"
+              >
+              {{::opponentTeam.name.length > 17 ? (opponentTeam.name | limitTo: 16) + '&hellip;' : opponentTeam.name}}
+            </a>
+          </td>
+          <td>
+          <span ng-if="::match.hasResults">
+            {{::teamStats.goals.length}}
+            -
+            {{::opponentStats.goals.length}}
+          </span>
+          </td>
+          <td>
+          <span ng-if="::match.hasResults">
+            {{::(teamStats.cards | filter: {type: 'yellow'}).length}}
+            -
+            {{::(opponentStats.cards | filter: {type: 'yellow'}).length}}
+          </span>
+          </td>
+          <td>
+          <span ng-if="::match.hasResults">
+            {{::(teamStats.cards | filter: {type: 'red'}).length}}
+            -
+            {{::(opponentStats.cards | filter: {type: 'red'}).length}}
+          </span>
+          </td>
+          <td>
+          <span ng-if="::match.hasResults"
+                ng-class="::{'text-muted': !teamCtrl.isBestPlayerFromTeam(match)}"
+                title="{{::bestPlayer.name.length > 17 ? bestPlayer.name : ''}}"
+            >
+            {{::bestPlayer.name.length > 17 ? (bestPlayer.name | limitTo: 16) + '&hellip;' : bestPlayer.name}}
+          </span>
+          </td>
+          <td>
+            <a ui-sref="app.fixture({divisionIndex:match.round.division.index, '#': 'round' + match.round.index})">
+              {{::match.round.index}}
+            </a>
+          </td>
+          <td>{{::match.date}}</td>
+          <td>{{::match.field}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-<h2>Jugadores ({{::teamCtrl.playerList.length}})</h2>
-<table class="table table-striped" ts-wrapper>
-  <thead>
-  <tr>
-    <th ts-criteria="player.name">Nombre</th>
-    <th ts-criteria="goals" ts-default="descending">Goles</th>
-    <th ts-criteria="bestPlayer" ts-default="descending" title="Jugador del Partido">JdP</th>
-    <th ts-criteria="yellowCards" ts-default="descending" title="Tarjetas Amarillas">TA</th>
-    <th ts-criteria="redCards" ts-default="descending" title="Tarjetas Rojas">TR</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="playerStats in teamCtrl.playerList track by playerStats.player.id" ts-repeat>
-    <td>{{playerStats.player.name}}</td>
-    <td>{{playerStats.goals}}</td>
-    <td>{{playerStats.bestPlayer}}</td>
-    <td>{{playerStats.yellowCards}}</td>
-    <td>{{playerStats.redCards}}</td>
-  </tr>
-  </tbody>
-</table>
+  <section>
+    <h2>Jugadores ({{::teamCtrl.playerList.length}})</h2>
+    <table class="table table-striped" ts-wrapper>
+      <thead>
+      <tr>
+        <th ts-criteria="player.name">Nombre</th>
+        <th ts-criteria="goals" ts-default="descending">Goles</th>
+        <th ts-criteria="bestPlayer" ts-default="descending" title="Jugador del Partido">JdP</th>
+        <th ts-criteria="yellowCards" ts-default="descending" title="Tarjetas Amarillas">TA</th>
+        <th ts-criteria="redCards" ts-default="descending" title="Tarjetas Rojas">TR</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="playerStats in teamCtrl.playerList track by playerStats.player.id" ts-repeat>
+        <td>{{playerStats.player.name}}</td>
+        <td>{{playerStats.goals}}</td>
+        <td>{{playerStats.bestPlayer}}</td>
+        <td>{{playerStats.yellowCards}}</td>
+        <td>{{playerStats.redCards}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</section>

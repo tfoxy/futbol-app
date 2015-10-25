@@ -24,40 +24,42 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed"
-                  ng-click="collapse()"
-                  aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <!--
-          <a class="navbar-brand" ui-sref="home">Inicio</a>
-          -->
-        </div>
+    <header>
+      <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    ng-click="collapse()"
+                    aria-expanded="{{!isCollapsed}}">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!--
+            <a class="navbar-brand" ui-sref="home">Inicio</a>
+            -->
+          </div>
 
-        <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
-          <ul class="nav navbar-nav">
-            <li ui-sref-active="active">
-              <a ui-sref="app.standings({divisionIndex:userData.divisionIndex})">Posiciones</a>
-            </li>
-            <li ui-sref-active="active">
-              <a ui-sref="app.matchesTable({divisionIndex:userData.divisionIndex})">Tabla de resultados</a>
-            </li>
-            <li ui-sref-active="active">
-              <a ui-sref="app.fixture({divisionIndex:userData.divisionIndex})">Fixture</a>
-            </li>
-          </ul>
-          <div ui-view="divisionList"></div>
+          <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
+            <ul class="nav navbar-nav">
+              <li ui-sref-active="active">
+                <a ui-sref="app.standings({divisionIndex:userData.divisionIndex})">Posiciones</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.matchesTable({divisionIndex:userData.divisionIndex})">Tabla de resultados</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.fixture({divisionIndex:userData.divisionIndex})">Fixture</a>
+              </li>
+            </ul>
+            <div ui-view="divisionList"></div>
+          </div>
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
 
-    <div ui-view="@app" class="container" style="padding-top: 80px;"></div>
+    <main role="main" ui-view="@app" class="container"></main>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
