@@ -2,7 +2,9 @@
   <table class="table table-striped">
     <thead ng-repeat-start="round in ::fixtureCtrl.division.rounds">
     <tr id="round{{round.index}}">
-      <th colspan="6"><h4>Fecha {{round.index}}</h4></th>
+      <th colspan="6"><h4>
+        <a ui-sref=".({'#': 'round' + round.index})" class="unstyle-anchor">Fecha {{round.index}}</a>
+      </h4></th>
     </tr>
     </thead>
     <tbody ng-repeat-end>

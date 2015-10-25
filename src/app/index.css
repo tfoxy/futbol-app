@@ -50,3 +50,7 @@ body > main {
   width: 113px;
   white-space: nowrap;
 }
+
+.unstyle-anchor {
+  color: inherit;
+}
