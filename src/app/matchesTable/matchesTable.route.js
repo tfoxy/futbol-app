@@ -1,13 +1,20 @@
 import MatchesTableController from './matchesTable.controller.js';
 
-function matchesTableRouterConfig($stateProvider) {
+function matchesTableRouterConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
+
   $stateProvider.state('app.matchesTable', {
-    url: '/matchesTable/{divisionIndex:[0-9]}',
+    url: '/matches-table/{divisionIndex:[0-9]}',
     resolve: MatchesTableController.resolve,
     templateUrl: 'app/matchesTable/matchesTable.html',
     controller: 'MatchesTableController',
     controllerAs: 'matchesTableCtrl'
+  });
+
+  $urlRouterProvider.when('/matchesTable/{divisionIndex:[0-9]}', $stateParams => {
+    'ngInject';
+
+    return '/matches-table/' + $stateParams.divisionIndex;
   });
 }
 
