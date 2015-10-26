@@ -29,6 +29,12 @@
       <th ts-criteria="goalsDifference" ts-default="descending" title="Diferencia de goles">
         +/-
       </th>
+      <th ts-criteria="yellowCards" title="Tarjetas Amarillas">
+        TA
+      </th>
+      <th ts-criteria="redCards" title="Tarjetas Rojas">
+        TR
+      </th>
     </tr>
     </thead>
     <tbody>
@@ -61,6 +67,12 @@
       </td>
       <td>
         <span>{{::standing.goalsDifference}}</span>
+      </td>
+      <td>
+        <span>{{::standing.yellowCards}}</span>
+      </td>
+      <td>
+        <span>{{::standing.redCards}}</span>
       </td>
     </tr>
     </tbody>

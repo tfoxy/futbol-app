@@ -1,3 +1,5 @@
+export default standingsCalculator;
+
 function standingsCalculator(divisionData) {
   let teams = divisionData.teams;
   let rounds = divisionData.rounds;
@@ -20,6 +22,16 @@ function standingsCalculator(divisionData) {
       goalsAgainst: 0,
       get goalsDifference() {
         return this.goalsScored - this.goalsAgainst;
+      },
+      yellowCards: 0,
+      redCards: 0,
+      generatedYellowCards: 0,
+      generatedRedCards: 0,
+      get totalYellowCardsOnMatches() {
+        return this.yellowCards + this.generatedYellowCards;
+      },
+      get totalRedCardsOnMatches() {
+        return this.redCards + this.generatedRedCards;
       }
     };
     standings.push(standing);
@@ -47,11 +59,8 @@ function standingsCalculator(divisionData) {
         visitorStanding.matchesDrawn++;
       }
 
-      localStanding.goalsScored += match.local.goals.length;
-      localStanding.goalsAgainst += match.visitor.goals.length;
-
-      visitorStanding.goalsScored += match.visitor.goals.length;
-      visitorStanding.goalsAgainst += match.local.goals.length;
+      countGoalsAndCards(localStanding, match.local, match.visitor);
+      countGoalsAndCards(visitorStanding, match.visitor, match.local);
     });
   });
 
@@ -80,4 +89,23 @@ function standingSorter(leftStanding, rightStanding) {
   return diffGoalsScored;
 }
 
-export default standingsCalculator;
+function countGoalsAndCards(standing, teamStats, opponentTeamStats) {
+  standing.goalsScored += teamStats.goals.length;
+  standing.goalsAgainst += opponentTeamStats.goals.length;
+
+  teamStats.cards.forEach(card => {
+    if (card.type === 'yellow') {
+      standing.yellowCards += 1;
+    } else if (card.type === 'red') {
+      standing.redCards += 1;
+    }
+  });
+
+  opponentTeamStats.cards.forEach(card => {
+    if (card.type === 'yellow') {
+      standing.generatedYellowCards += 1;
+    } else if (card.type === 'red') {
+      standing.generatedRedCards += 1;
+    }
+  });
+}

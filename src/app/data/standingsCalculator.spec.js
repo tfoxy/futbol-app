@@ -20,11 +20,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: [1]
+            goals: [1],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: []
+            goals: [],
+            cards: []
           }
         }]
       }],
@@ -41,11 +43,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: [1]
+            goals: [1],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: []
+            goals: [],
+            cards: []
           }
         }]
       }],
@@ -62,11 +66,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: [1]
+            goals: [1],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: []
+            goals: [],
+            cards: []
           }
         }]
       }],
@@ -83,11 +89,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: new Array(5)
+            goals: new Array(5),
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: new Array(2)
+            goals: new Array(2),
+            cards: []
           }
         }]
       }],
@@ -107,11 +115,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: [1]
+            goals: [1],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: [1]
+            goals: [1],
+            cards: []
           }
         }]
       }],
@@ -129,11 +139,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: [1, 2]
+            goals: [1, 2],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: [1]
+            goals: [1],
+            cards: []
           }
         }]
       }],
@@ -151,11 +163,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: []
+            goals: [],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: []
+            goals: [],
+            cards: []
           }
         }]
       }],
@@ -173,11 +187,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 4},
-            goals: [1]
+            goals: [1],
+            cards: []
           },
           visitor: {
             team: {id: 3},
-            goals: []
+            goals: [],
+            cards: []
           }
         }]
       }],
@@ -195,21 +211,25 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: new Array(8)
+            goals: new Array(8),
+            cards: []
           },
           visitor: {
             team: {id: 5},
-            goals: new Array(6)
+            goals: new Array(6),
+            cards: []
           }
         }, {
           hasResults: true,
           local: {
             team: {id: 4},
-            goals: new Array(5)
+            goals: new Array(5),
+            cards: []
           },
           visitor: {
             team: {id: 5},
-            goals: new Array(2)
+            goals: new Array(2),
+            cards: []
           }
         }]
       }],
@@ -228,21 +248,25 @@ describe(dataModule.name + '.standingsCalculator', () => {
               hasResults: true,
               local: {
                 team: {id: 3},
-                goals: new Array(5)
+                goals: new Array(5),
+                cards: []
               },
               visitor: {
                 team: {id: 5},
-                goals: new Array(3)
+                goals: new Array(3),
+                cards: []
               }
             }, {
               hasResults: true,
               local: {
                 team: {id: 4},
-                goals: new Array(8)
+                goals: new Array(8),
+                cards: []
               },
               visitor: {
                 team: {id: 5},
-                goals: new Array(6)
+                goals: new Array(6),
+                cards: []
               }
             }]
           }],
@@ -276,11 +300,13 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: []
+            goals: [],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: [1]
+            goals: [1],
+            cards: []
           }
         }]
       }],
@@ -306,31 +332,37 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: [1]
+            goals: [1],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: []
+            goals: [],
+            cards: []
           }
         }, {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: []
+            goals: [],
+            cards: []
           },
           visitor: {
             team: {id: 5},
-            goals: []
+            goals: [],
+            cards: []
           }
         }, {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: []
+            goals: [],
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: [1]
+            goals: [1],
+            cards: []
           }
         }]
       }],
@@ -347,18 +379,67 @@ describe(dataModule.name + '.standingsCalculator', () => {
           hasResults: true,
           local: {
             team: {id: 3},
-            goals: new Array(3)
+            goals: new Array(3),
+            cards: []
           },
           visitor: {
             team: {id: 4},
-            goals: new Array(5)
+            goals: new Array(5),
+            cards: []
           }
         }]
       }],
       teams: [{id: 3}, {id: 4}]
     });
 
-    expect(standings[0]).to.have.property('goalsDifference', -2);
+    expect(standings[0]).to.have.property('goalsDifference', 2);
+    expect(standings[1]).to.have.property('goalsDifference', -2);
+  });
+
+  it('should count the yellow cards', () => {
+    let standings = standingsCalculator({
+      rounds: [{
+        matches: [{
+          hasResults: true,
+          local: {
+            team: {id: 3},
+            goals: [1],
+            cards: [{type: 'yellow'}, {type: 'red'}, {type: 'yellow'}]
+          },
+          visitor: {
+            team: {id: 4},
+            goals: [],
+            cards: []
+          }
+        }]
+      }],
+      teams: [{id: 3}, {id: 4}]
+    });
+
+    expect(standings[0]).to.have.property('yellowCards', 2);
+  });
+
+  it('should count the red cards', () => {
+    let standings = standingsCalculator({
+      rounds: [{
+        matches: [{
+          hasResults: true,
+          local: {
+            team: {id: 3},
+            goals: [1],
+            cards: [{type: 'yellow'}, {type: 'red'}, {type: 'yellow'}]
+          },
+          visitor: {
+            team: {id: 4},
+            goals: [],
+            cards: []
+          }
+        }]
+      }],
+      teams: [{id: 3}, {id: 4}]
+    });
+
+    expect(standings[0]).to.have.property('redCards', 1);
   });
 
 });
