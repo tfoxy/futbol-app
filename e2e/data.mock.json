@@ -1,0 +1,46 @@
+{
+  "seasons": [{
+    "divisions": [{
+      "name": "First division",
+      "index": 1,
+      "rounds": [{
+        "index": 1,
+        "matches": [{
+          "id": 1,
+          "hasResults": true,
+          "local": {
+            "team": {"id": 1, "name": "WorstTeam"},
+            "players": [],
+            "goals": [],
+            "cards": []
+          },
+          "visitor": {
+            "team": {"id": 2, "name": "BestTeam"},
+            "players": [{"id": 1, "name": "Foo Bar"}],
+            "goals": [{"player": {"id": 1, "name": "Foo Bar"}}],
+            "cards": []
+          },
+          "bestPlayer": {"id": 1, "name": "Foo Bar"},
+          "date": "2015/06/08 14:00",
+          "field": 1
+        }]
+      }],
+      "teams": [
+        {"id": 1, "name": "WorstTeam"},
+        {"id": 2, "name": "BestTeam"},
+        {"id": 3, "name": "RegularTeam"}
+      ]
+    }, {
+      "name": "Second division",
+      "index": 2,
+      "rounds": [{
+        "index": 1,
+        "matches": []
+      }],
+      "teams": [
+        {"id": 3, "name": "Onions"},
+        {"id": 4, "name": "Lettuces"}
+      ]
+    }]
+  }]
+}

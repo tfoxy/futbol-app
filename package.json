@@ -4,7 +4,7 @@
   "description": "Application to show stats of a football tournament",
   "dependencies": {},
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test && gulp protractor"
   },
   "repository": {
     "type": "git",
