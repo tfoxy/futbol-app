@@ -1,0 +1,39 @@
+<section ng-init="match = matchCtrl.match" class="match-view">
+  <header class="text-center">
+    <strong>
+      {{::match.date}} - Cancha Nro. {{::match.field}}
+    </strong>
+  </header>
+  <table class="table">
+  <thead>
+    <tr>
+      <td class="text-center">
+        <strong>
+          <a ui-sref="app.team({teamId: match.local.team.id})">
+            {{::match.local.team.name}}
+          </a>
+        </strong>
+      </td>
+      <td class="text-center">
+        {{::match.local.goals ? match.local.goals.length : '-'}}
+      </td>
+      <td class="text-center">
+        {{::match.visitor.goals ? match.visitor.goals.length : '-'}}
+      </td>
+      <td class="text-center">
+        <strong>
+          <a ui-sref="app.team({teamId: match.visitor.team.id})">
+            {{::match.visitor.team.name}}
+          </a>
+        </strong>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2" match-players-table="::match.local"></td>
+      <td colspan="2" match-players-table="::match.visitor"></td>
+    </tr>
+  </tbody>
+  </table>
+</section>

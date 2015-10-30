@@ -1,0 +1,32 @@
+<section class="match-players-table-view">
+  <table class="table table-striped table-condensed">
+    <thead>
+    <tr>
+      <th>
+        Nombre
+      </th>
+      <th title="Goles">
+        G
+      </th>
+      <th title="Tarjetas">
+        T
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="player in ::matchPlayersTableCtrl.teamStats.players"
+        ng-init="playerStats = matchPlayersTableCtrl.teamStats.playerStatsById[player.id]"
+      >
+      <td ng-class="{'match-best-player': playerStats.isBestPlayer}">
+        {{player.name}}
+      </td>
+      <td>
+        {{playerStats.goals.length || ''}}
+      </td>
+      <td ng-class="'match-card-' + playerStats.card.type">
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>

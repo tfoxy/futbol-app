@@ -1,0 +1,12 @@
+.match-view .match-card-red {
+  background-color: red;
+}
+
+.match-view .match-card-yellow {
+  background-color: yellow;
+}
+
+.match-view .match-best-player {
+  color: blue;
+  font-weight: bold;
+}

@@ -29,6 +29,9 @@ class DataService {
 
     this._teamsPromise =
       this._lastSeasonPromise.then(generateTeamsById);
+
+    this._matchesByIdPromise =
+      this._lastSeasonPromise.then(generateMatchesById);
   }
 
   getStandings() {
@@ -45,6 +48,10 @@ class DataService {
 
   getTeams() {
     return this._teamsPromise;
+  }
+
+  getMatchesById() {
+    return this._matchesByIdPromise;
   }
 
   getDivisionsByIndex() {
@@ -120,4 +127,50 @@ function generateTeamsById(season) {
   });
 
   return teamsById;
+}
+
+function generateMatchesById(season) {
+  let matchesById = {};
+
+  season.divisions.forEach(division => {
+    division.rounds.forEach(round => {
+      round.matches.forEach(match => {
+        matchesById[match.id] = match;
+
+        if (match.hasResults) {
+          match.local.playerStatsById = createPlayerStatsById(match, match.local);
+          match.visitor.playerStatsById = createPlayerStatsById(match, match.visitor);
+        }
+      });
+    });
+  });
+
+  return matchesById;
+}
+
+const NONE_CARD = {type: 'none'};
+function createPlayerStatsById(match, teamStats) {
+  let playerStatsById = {};
+
+  teamStats.players.forEach(player => {
+    playerStatsById[player.id] = {
+      isBestPlayer: false,
+      goals: [],
+      card: NONE_CARD
+    };
+  });
+
+  teamStats.goals.forEach(goal => {
+    playerStatsById[goal.player.id].goals.push(goal);
+  });
+
+  teamStats.cards.forEach(card => {
+    playerStatsById[card.player.id].card = card;
+  });
+
+  if (match.bestPlayer && match.bestPlayer.id in playerStatsById) {
+    playerStatsById[match.bestPlayer.id].isBestPlayer = true;
+  }
+
+  return playerStatsById;
 }
