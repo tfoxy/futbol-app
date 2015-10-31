@@ -1,6 +1,7 @@
 {
   "name": "futbolApp",
   "dependencies": {
+    "ng-dialog": "~0.5.5",
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.5",
     "angular": "~1.4.2",
@@ -24,8 +25,14 @@
     },
     "angular-tablesort": {
       "main": [
-        "./js/angular-tablesort.js",
-        "./tablesort.css"
+        "js/angular-tablesort.js",
+        "tablesort.css"
+      ]
+    },
+    "ng-dialog": {
+      "main": [
+        "js/ngDialog.js",
+        "css/ngDialog.css"
       ]
     }
   },

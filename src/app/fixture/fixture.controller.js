@@ -10,13 +10,18 @@ class FixtureController {
     };
   }
 
-  constructor(division, $stateParams, userData) {
+  constructor(division, $stateParams, userData, $state) {
     'ngInject';
 
     this.division = division;
+    this._$state = $state;
 
     // Sync userData.divisionIndex
     userData.divisionIndex = +$stateParams.divisionIndex;
+  }
+
+  showMatch(match) {
+    console.log(this._$state.go('.match', {matchId: match.id}));
   }
 }
 

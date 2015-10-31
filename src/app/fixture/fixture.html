@@ -8,7 +8,7 @@
     </tr>
     </thead>
     <tbody ng-repeat-end>
-    <tr ng-repeat="match in ::round.matches">
+    <tr ng-repeat="match in ::round.matches"> <!-- ng-click="::fixtureCtrl.showMatch(match)" class="cursor-pointer" -->
       <td class="col-sm-3 text-right">
         <a ui-sref="app.team({teamId: match.local.team.id})">{{match.local.team.name}}</a>
       </td>
@@ -17,7 +17,11 @@
       <td class="col-sm-3">
         <a ui-sref="app.team({teamId: match.visitor.team.id})">{{match.visitor.team.name}}</a>
       </td>
-      <td class="col-sm-3 text-center"><time>{{match.date}}</time></td>
+      <td class="col-sm-3 text-center">
+        <a ui-sref=".match({matchId: match.id})">
+          <time>{{match.date}}</time>
+        </a>
+      </td>
       <td class="col-sm-1 text-center">{{match.field}}</td>
     </tr>
     </tbody>

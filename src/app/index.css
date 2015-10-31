@@ -54,3 +54,12 @@ body > main {
 .unstyle-anchor {
   color: inherit;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Fix navbar moving to the right when dialog is open */
+.ngdialog-open .navbar {
+  padding-right: 15px;
+}

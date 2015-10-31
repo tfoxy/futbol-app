@@ -1,6 +1,7 @@
 import config from './index.config.js';
 import routerConfig from './index.route.js';
 import fillRootScope from'./fillRootScope.run.js';
+import listenRootScopeEvents from './listenRootScopeEvents.run.js';
 
 import userDataModule from './userData/userData.module.js';
 import divisionListModule from './divisionList/divisionList.module.js';
@@ -23,4 +24,5 @@ angular.module('futbolApp', [
 ])
   .config(config)
   .config(routerConfig)
-  .run(fillRootScope);
+  .run(fillRootScope)
+  .run(listenRootScopeEvents);
