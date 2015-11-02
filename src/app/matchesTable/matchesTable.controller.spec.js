@@ -9,8 +9,10 @@ describe(matchesTableModule.name + '.controller', () => {
     matchesByTeams = {};
     standings = {};
     controller = $controller('MatchesTableController', {
-      matchesByTeams,
-      standings
+      division: {
+        matchesByTeams,
+        standings
+      }
     });
   }));
 

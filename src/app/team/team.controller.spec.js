@@ -1,70 +1,16 @@
 import teamModule from './team.module.js';
 
 describe(teamModule.name + '.controller', () => {
-  let controller, team, teams, matchesByTeams;
+  let controller, team;
 
   beforeEach(angular.mock.module(teamModule.name));
 
   beforeEach(inject(($controller) => {
-    team = {id: '79'};
-    teams = {[team.id]: team};
-    matchesByTeams = {};
-    let $stateParams = {teamId: team.id};
+    team = {id: '79', matchList: []};
     controller = $controller('TeamController', {
-      teams,
-      team,
-      matchesByTeams,
-      $stateParams
+      team
     });
   }));
-
-  describe('#_getMatchList', () => {
-
-    it('should have matches were the team is involved', () => {
-      let match = {
-        round: {index: 1},
-        local: {
-          team: {id: 3}
-        },
-        visitor: {
-          team: team
-        }
-      };
-      matchesByTeams[team.id] = {
-        3: match
-      };
-      matchesByTeams[3] = {
-        7: {
-          round: {index: 2},
-          local: {
-            team: {id: 3}
-          },
-          visitor: {
-            team: {id: 7}
-          }
-        }
-      };
-      let matchList = controller._getMatchList(matchesByTeams);
-      expect(matchList).to.have.length(1);
-      expect(matchList[0]).to.equal(match);
-    });
-
-    it('sort the matches by round index', () => {
-      matchesByTeams[team.id] = {
-        3: {
-          round: {index: 2}
-        },
-        7: {
-          round: {index: 1}
-        }
-      };
-      let matchList = controller._getMatchList(matchesByTeams);
-      expect(matchList).to.have.length(2);
-      expect(matchList[0]).to.have.deep.property('round.index', 1);
-      expect(matchList[1]).to.have.deep.property('round.index', 2);
-    });
-
-  });
 
   describe('#getMatchOpponentStats', () => {
 
@@ -184,7 +130,7 @@ describe(teamModule.name + '.controller', () => {
     });
 
     it('should return players with goals, yellow cards, red cards and best player', () => {
-      controller.matchList = [
+      team.matchList = [
         {
           hasResults: true,
           bestPlayer: {id: 3},
@@ -215,7 +161,7 @@ describe(teamModule.name + '.controller', () => {
     });
 
     it('should sort the players by goals', () => {
-      controller.matchList = [
+      team.matchList = [
         {
           hasResults: true,
           local: {
@@ -238,7 +184,7 @@ describe(teamModule.name + '.controller', () => {
     });
 
     it('should sort the players by best player number if they have the same goals', () => {
-      controller.matchList = [
+      team.matchList = [
         {
           hasResults: true,
           bestPlayer: {id: 5},
@@ -261,7 +207,7 @@ describe(teamModule.name + '.controller', () => {
     });
 
     it('should skip stats for match that has no results', () => {
-      controller.matchList = [
+      team.matchList = [
         {
           hasResults: false,
           local: {

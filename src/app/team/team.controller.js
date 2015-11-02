@@ -2,30 +2,22 @@ class TeamController {
 
   static get resolve() {
     return {
-      teams: ['data', data => data.getTeams()],
-      team: ['teams', '$stateParams', (teams, $stateParams) => teams[$stateParams.teamId]],
-      matchesByTeams: ['data', data => data.getMatchesByTeams()],
+      processedData: ['data', data => data.getProcessedData()],
+      team: (processedData, $stateParams) => {
+        'ngInject';
+        return processedData.teamsById[$stateParams.teamId];
+      },
       $title: ['team', team => team.name]
     };
   }
 
-  constructor(team, matchesByTeams) {
+  constructor(team, $filter) {
     'ngInject';
 
+    this._orderBy = $filter('orderBy');
+
     this.team = team;
-    this.matchList = this._getMatchList(matchesByTeams);
     this.playerList = this._getPlayerList();
-  }
-
-  _getMatchList(matchesByTeams) {
-    let matchList = [];
-    let matchesByOtherTeamId = matchesByTeams[this.team.id];
-    for (let otherTeamId in matchesByOtherTeamId) {
-      let match = matchesByOtherTeamId[otherTeamId];
-      matchList.push(match);
-    }
-
-    return matchList.sort(roundIndexSorter);
   }
 
   getMatchOpponentStats(match) {
@@ -56,7 +48,7 @@ class TeamController {
   _getPlayerList() {
     let playerStatsById = {};
 
-    this.matchList.forEach(match => {
+    this.team.matchList.forEach(match => {
       let teamStats = this.getMatchTeamStats(match);
 
       teamStats.players.forEach(player => {
@@ -99,37 +91,13 @@ class TeamController {
       playerList.push(playerStats);
     }
 
-    return playerList.sort(playerStatsSorter);
+    return this._orderBy(playerList, [
+      '-goals',
+      '-bestPlayer',
+      '-yellowCards',
+      '-redCards'
+    ]);
   }
 }
 
 export default TeamController;
-
-
-function roundIndexSorter(leftMatch, rightMatch) {
-  return leftMatch.round.index - rightMatch.round.index;
-}
-
-function playerStatsSorter(leftPlayerStats, rightPlayerStats) {
-  let diffGoals = rightPlayerStats.goals - leftPlayerStats.goals;
-  if (diffGoals) {
-    return diffGoals;
-  }
-
-  let diffBestPlayer = rightPlayerStats.bestPlayer - leftPlayerStats.bestPlayer;
-  if (diffBestPlayer) {
-    return diffBestPlayer;
-  }
-
-  let diffYellowCards = rightPlayerStats.yellowCards - leftPlayerStats.yellowCards;
-  if (diffYellowCards) {
-    return diffYellowCards;
-  }
-
-  let diffRedCards = rightPlayerStats.redCards - leftPlayerStats.redCards;
-  if (diffRedCards) {
-    return diffRedCards;
-  }
-
-  return -1;
-}

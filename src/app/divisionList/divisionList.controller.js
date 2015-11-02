@@ -2,7 +2,8 @@ class DivisionListController {
 
   static get resolve() {
     return {
-      divisions: ['data', data => data.getDivisionList()]
+      processedData: ['data', data => data.getProcessedData()],
+      divisions: ['processedData', processedData => processedData.lastSeason.divisions]
     };
   }
 

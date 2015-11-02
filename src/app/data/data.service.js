@@ -3,152 +3,147 @@ import standingsCalculator from './standingsCalculator.js';
 // A RESTful factory for retrieving contacts from 'data.json'
 class DataService {
 
+  static get _listeners() {
+    return {
+      initializeDivision,
+      initializeTeams,
+      generateMatchesByTeams,
+      generateMatchesById,
+      generatePlayerStatsPerMatch,
+      generateTeamsById,
+      generateDivisionsByIndex,
+      createPlayerStatsById
+    };
+  }
+
   constructor($http) {
     'ngInject';
     this._path = 'assets/data.json';
 
-    this._request = $http.get(this._path).then(resp => {
-      return resp.data;
-    });
+    this._request = $http.get(this._path).then(resp => resp.data);
 
     this._initialize();
   }
 
   _initialize() {
-    this._lastSeasonPromise = this._request.then(data => {
+    let processedData = {
+      matchesByTeams: {},
+      standingsByDivisionIndex: {},
+      divisionsByIndex: {},
+      teamsById: {},
+      matchesById: {}
+    };
+
+    let listeners = {
+      division: [
+        initializeDivision,
+        initializeTeams,
+        generateTeamsById,
+        generateDivisionsByIndex
+      ],
+      round: [],
+      match: [
+        generateMatchesByTeams,
+        generateMatchesById,
+        generatePlayerStatsPerMatch,
+        generateTeamMatchList
+      ]
+    };
+
+    this._processedDataPromise = this._request.then(data => {
       let seasons = data.seasons;
       let lastSeason = seasons[seasons.length - 1];
-      return lastSeason;
+      processedData.lastSeason = lastSeason;
+      this._iterateSeasonData(lastSeason, listeners, processedData);
+
+      return processedData;
     });
-
-    this._standingsPromise =
-      this._lastSeasonPromise.then(generateStandingsMap);
-
-    this._matchesByTeamsPromise =
-      this._lastSeasonPromise.then(generateMatchesByTeams);
-
-    this._teamsPromise =
-      this._lastSeasonPromise.then(generateTeamsById);
-
-    this._matchesByIdPromise =
-      this._lastSeasonPromise.then(generateMatchesById);
   }
 
-  getStandings() {
-    return this._standingsPromise;
+  getProcessedData() {
+    return this._processedDataPromise;
   }
 
-  getMatchesByTeams() {
-    return this._matchesByTeamsPromise;
-  }
-
-  getDivisionList() {
-    return this._lastSeasonPromise.then(season => season.divisions);
-  }
-
-  getTeams() {
-    return this._teamsPromise;
-  }
-
-  getMatchesById() {
-    return this._matchesByIdPromise;
-  }
-
-  getDivisionsByIndex() {
-    return this._lastSeasonPromise.then(season => {
-      let divisionsByIndex = {};
-      season.divisions.forEach(division => {
-        divisionsByIndex[division.index] = division;
+  _iterateSeasonData(season, listeners, processedData) {
+    season.divisions.forEach(division => {
+      division.season = season;
+      listeners && listeners.division.forEach(listener => {
+        listener(division, processedData);
       });
-      return divisionsByIndex;
-    });
-  }
-
-  getDivisionByIndex(divisionIndex) {
-    return this._lastSeasonPromise.then(season => {
-      return season.divisions.find(division => {
-        return division.index === +divisionIndex;
+      division.rounds.forEach(round => {
+        round.division = division;
+        listeners && listeners.round.forEach(listener => {
+          listener(round, processedData);
+        });
+        round.matches.forEach(match => {
+          match.round = round;
+          listeners && listeners.match.forEach(listener => {
+            listener(match, processedData);
+          });
+        });
       });
     });
   }
-
 }
 
 export default DataService;
 
 // //////////////
 
-function generateMatchesByTeams(season) {
-  let matchesByTeams = {};
+function generateMatchesByTeams(match) {
+  let localId = match.local.team.id;
+  let visitorId = match.visitor.team.id;
+  let matchesByTeams = match.round.division.matchesByTeams;
 
-  season.divisions.forEach(division => {
-    division.rounds.forEach(round => {
-      round.matches.forEach(match => {
-        let localId = match.local.team.id;
-        let visitorId = match.visitor.team.id;
+  if (!(localId in matchesByTeams)) {
+    matchesByTeams[localId] = {};
+  }
+  if (!(visitorId in matchesByTeams)) {
+    matchesByTeams[visitorId] = {};
+  }
 
-        if (!(localId in matchesByTeams)) {
-          matchesByTeams[localId] = {};
-        }
-        if (!(visitorId in matchesByTeams)) {
-          matchesByTeams[visitorId] = {};
-        }
-
-        matchesByTeams[localId][visitorId] = match;
-        matchesByTeams[visitorId][localId] = match;
-
-        match.round = round;
-      });
-
-      round.division = division;
-    });
-  });
-
-  return matchesByTeams;
+  matchesByTeams[localId][visitorId] = match;
+  matchesByTeams[visitorId][localId] = match;
 }
 
-function generateStandingsMap(season) {
-  let standingsPerDivisionIndex = {};
-
-  season.divisions.forEach(division => {
-    standingsPerDivisionIndex[division.index] = standingsCalculator(division);
-  });
-
-  return standingsPerDivisionIndex;
+function initializeDivision(division) {
+  division.standings = standingsCalculator(division);
+  division.matchesByTeams = {};
 }
 
-function generateTeamsById(season) {
-  let teamsById = {};
-
-  season.divisions.forEach(division => {
-    division.teams.forEach(team => {
-      teamsById[team.id] = team;
-    });
+function initializeTeams(division) {
+  division.teams.forEach(team => {
+    team.matchList = [];
   });
-
-  return teamsById;
 }
 
-function generateMatchesById(season) {
-  let matchesById = {};
-
-  season.divisions.forEach(division => {
-    division.rounds.forEach(round => {
-      round.matches.forEach(match => {
-        matchesById[match.id] = match;
-
-        if (match.hasResults) {
-          match.local.playerStatsById = createPlayerStatsById(match, match.local);
-          match.visitor.playerStatsById = createPlayerStatsById(match, match.visitor);
-        }
-      });
-    });
+function generateTeamsById(division, processedData) {
+  division.teams.forEach(team => {
+    processedData.teamsById[team.id] = team;
   });
-
-  return matchesById;
 }
 
-const NONE_CARD = {type: 'none'};
+function generateMatchesById(match, processedData) {
+  processedData.matchesById[match.id] = match;
+}
+
+function generatePlayerStatsPerMatch(match) {
+  if (match.hasResults) {
+    match.local.playerStatsById = createPlayerStatsById(match, match.local);
+    match.visitor.playerStatsById = createPlayerStatsById(match, match.visitor);
+  }
+}
+
+function generateDivisionsByIndex(division, processedData) {
+  processedData.divisionsByIndex[division.index] = division;
+}
+
+function generateTeamMatchList(match, processedData) {
+  processedData.teamsById[match.local.team.id].matchList.push(match);
+  processedData.teamsById[match.visitor.team.id].matchList.push(match);
+}
+
+const NONE_CARD = {type: 'none', severity: 0};
 function createPlayerStatsById(match, teamStats) {
   let playerStatsById = {};
 

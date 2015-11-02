@@ -20,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="match in ::teamCtrl.matchList"
+        <tr ng-repeat="match in ::teamCtrl.team.matchList"
             ng-init="opponentStats = teamCtrl.getMatchOpponentStats(match);
                    teamStats = teamCtrl.getMatchTeamStats(match);
                    opponentTeam = opponentStats.team;

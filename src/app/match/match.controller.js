@@ -2,10 +2,10 @@ class MatchController {
 
   static get resolve() {
     return {
-      matchesById: ['data', data => data.getMatchesById()],
-      match: (matchesById, $stateParams) => {
+      processedData: ['data', data => data.getProcessedData()],
+      match: (processedData, $stateParams) => {
         'ngInject';
-        return matchesById[$stateParams.matchId];
+        return processedData.matchesById[$stateParams.matchId];
       },
       $title: match => {
         'ngInject';

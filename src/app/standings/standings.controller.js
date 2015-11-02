@@ -2,19 +2,19 @@ class StandingsController {
 
   static get resolve() {
     return {
-      standings: ['data', data => data.getStandings()],
-      division: (data, $stateParams) => {
+      processedData: ['data', data => data.getProcessedData()],
+      division: (processedData, $stateParams) => {
         'ngInject';
-        return data.getDivisionByIndex($stateParams.divisionIndex);
+        return processedData.divisionsByIndex[$stateParams.divisionIndex];
       },
       $title: ['division', division => 'Posiciones ' + division.name]
     };
   }
 
-  constructor(standings, $stateParams, userData) {
+  constructor(division, $stateParams, userData) {
     'ngInject';
 
-    this.standings = standings[$stateParams.divisionIndex];
+    this.standings = division.standings;
 
     // Sync userData.divisionIndex
     userData.divisionIndex = +$stateParams.divisionIndex;

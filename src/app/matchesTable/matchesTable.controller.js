@@ -2,21 +2,20 @@ class MatchesTableController {
 
   static get resolve() {
     return {
-      matchesByTeams: ['data', data => data.getMatchesByTeams()],
-      standings: ['data', data => data.getStandings()],
-      division: (data, $stateParams) => {
+      processedData: ['data', data => data.getProcessedData()],
+      division: (processedData, $stateParams) => {
         'ngInject';
-        return data.getDivisionByIndex($stateParams.divisionIndex);
+        return processedData.divisionsByIndex[$stateParams.divisionIndex];
       },
       $title: ['division', division => 'Resultados ' + division.name]
     };
   }
 
-  constructor(matchesByTeams, standings, $stateParams, userData) {
+  constructor(division, $stateParams, userData) {
     'ngInject';
 
-    this._matchesByTeams = matchesByTeams;
-    this.standings = standings[$stateParams.divisionIndex];
+    this._matchesByTeams = division.matchesByTeams;
+    this.standings = division.standings;
 
     // Sync userData.divisionIndex
     userData.divisionIndex = +$stateParams.divisionIndex;
