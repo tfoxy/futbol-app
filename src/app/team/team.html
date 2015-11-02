@@ -67,7 +67,11 @@
               {{::match.round.index}}
             </a>
           </td>
-          <td>{{::match.date}}</td>
+          <td>
+            <a ui-sref=".match({matchId: match.id})">
+              <time>{{::match.date}}</time>
+            </a>
+          </td>
           <td>{{::match.field}}</td>
         </tr>
         </tbody>
