@@ -7,20 +7,20 @@
   <table class="table">
   <thead>
     <tr>
-      <td class="text-center">
+      <td class="text-center col-sm-5">
         <strong>
           <a ui-sref="app.team({teamId: match.local.team.id})">
             {{::match.local.team.name}}
           </a>
         </strong>
       </td>
-      <td class="text-center">
+      <td class="text-center col-sm-1">
         {{::match.local.goals ? match.local.goals.length : '-'}}
       </td>
-      <td class="text-center">
+      <td class="text-center col-sm-1">
         {{::match.visitor.goals ? match.visitor.goals.length : '-'}}
       </td>
-      <td class="text-center">
+      <td class="text-center col-sm-5">
         <strong>
           <a ui-sref="app.team({teamId: match.visitor.team.id})">
             {{::match.visitor.team.name}}
@@ -31,8 +31,8 @@
   </thead>
   <tbody>
     <tr>
-      <td colspan="2" match-players-table="::match.local"></td>
-      <td colspan="2" match-players-table="::match.visitor"></td>
+      <td colspan="2" match-players-table="::match.local" class="col-sm-6"></td>
+      <td colspan="2" match-players-table="::match.visitor" class="col-sm-6"></td>
     </tr>
   </tbody>
   </table>
