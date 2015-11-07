@@ -10,6 +10,7 @@ import matchesTableModule from './matchesTable/matchesTable.module.js';
 import teamModule from './team/team.module.js';
 import fixtureModule from './fixture/fixture.module.js';
 import matchModule from './match/match.module.js';
+import playersModule from './players/players.module.js';
 
 angular.module('futbolApp', [
   'ui.router',
@@ -20,7 +21,8 @@ angular.module('futbolApp', [
   matchesTableModule.name,
   teamModule.name,
   fixtureModule.name,
-  matchModule.name
+  matchModule.name,
+  playersModule.name
 ])
   .config(config)
   .config(routerConfig)

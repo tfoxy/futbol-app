@@ -16,8 +16,10 @@ class DataService {
     };
   }
 
-  constructor($http) {
+  constructor($http, playerStatsUtil) {
     'ngInject';
+    this._playerStatsUtil = playerStatsUtil;
+
     this._path = 'assets/data.json';
 
     this._request = $http.get(this._path).then(resp => resp.data);
@@ -36,7 +38,7 @@ class DataService {
 
     let listeners = {
       division: [
-        initializeDivision,
+        initializeDivision.bind(this),
         initializeTeams,
         generateTeamsById,
         generateDivisionsByIndex
@@ -46,7 +48,8 @@ class DataService {
         generateMatchesByTeams,
         generateMatchesById,
         generatePlayerStatsPerMatch,
-        generateTeamMatchList
+        generateTeamMatchList,
+        generatePlayerStatsPerDivision.bind(this)
       ]
     };
 
@@ -109,6 +112,12 @@ function generateMatchesByTeams(match) {
 function initializeDivision(division) {
   division.standings = standingsCalculator(division);
   division.matchesByTeams = {};
+  division.playerStatsById = {};
+  Object.defineProperty(division, 'playerStatsList', {
+    get: () => {
+      return this._playerStatsUtil.toArray(division.playerStatsById);
+    }
+  });
 }
 
 function initializeTeams(division) {
@@ -141,6 +150,11 @@ function generateDivisionsByIndex(division, processedData) {
 function generateTeamMatchList(match, processedData) {
   processedData.teamsById[match.local.team.id].matchList.push(match);
   processedData.teamsById[match.visitor.team.id].matchList.push(match);
+}
+
+function generatePlayerStatsPerDivision(match) {
+  let playerStatsById = match.round.division.playerStatsById;
+  this._playerStatsUtil.addMatch(playerStatsById, match);
 }
 
 const NONE_CARD = {type: 'none', severity: 0};

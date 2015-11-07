@@ -14,11 +14,12 @@ const angularMocksScript = fs.readFileSync('bower_components/angular-mocks/angul
 
 function MainPage() {
   this.nav = {
-    element: $('body > .navbar')
+    element: $('body > header > .navbar')
   };
   this.nav.standingsEl = this.nav.element.$('a[ui-sref^="app.standings"]');
   this.nav.resultsTableEl = this.nav.element.$('a[ui-sref^="app.matchesTable"]');
   this.nav.fixtureEl = this.nav.element.$('a[ui-sref^="app.fixture"]');
+  this.nav.playersEl = this.nav.element.$('a[ui-sref^="app.players"]');
   this.nav.divisionsEls = this.nav.element.$$('[ui-view="divisionList"] a');
 }
 
@@ -27,14 +28,14 @@ MainPage.prototype.loadMockData = loadMockData;
 MainPage.prototype.logBrowserLog = logBrowserLog;
 
 function navigate() {
-  browser.get('/index.html');
+  return browser.get('/index.html');
 }
 
 function loadMockData() {
   browser.addMockModule('ngMockE2E', angularMocksScript);
-  browser.addMockModule('futbolAppDev', (mockData) => {
+  browser.addMockModule('futbolAppDev', function(mockData) {
     angular.module('futbolAppDev', ['ngMockE2E'])
-      .run(['$httpBackend', ($httpBackend) => {
+      .run(['$httpBackend', function($httpBackend) {
         $httpBackend.whenGET('assets/data.json').respond(mockData);
         $httpBackend.whenGET(/^app\//).passThrough();
       }]);

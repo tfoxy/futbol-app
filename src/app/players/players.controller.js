@@ -1,4 +1,4 @@
-class FixtureController {
+class PlayersController {
 
   static get resolve() {
     return {
@@ -7,7 +7,7 @@ class FixtureController {
         'ngInject';
         return processedData.divisionsByIndex[$stateParams.divisionIndex];
       },
-      $title: ['division', division => 'Fixture ' + division.name]
+      $title: ['division', division => 'Jugadores ' + division.name]
     };
   }
 
@@ -16,9 +16,11 @@ class FixtureController {
 
     this.division = division;
 
+    this.playerList = division.playerStatsList;
+
     // Sync userData.divisionIndex
     userData.divisionIndex = +$stateParams.divisionIndex;
   }
 }
 
-export default FixtureController;
+export default PlayersController;

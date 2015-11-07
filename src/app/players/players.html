@@ -1,0 +1,40 @@
+<section id="players-view" class="players-view">
+  <table class="table table-striped" ts-wrapper>
+    <thead>
+    <tr>
+      <th ts-criteria="player.name">Nombre</th>
+      <th ts-criteria="teams[teams.length - 1]">Equipo</th>
+      <th ts-criteria="goals" ts-default="descending">Goles</th>
+      <th ts-criteria="bestPlayer" ts-default="descending" title="Jugador del Partido">JdP</th>
+      <th ts-criteria="yellowCards" ts-default="descending" title="Tarjetas Amarillas">TA</th>
+      <th ts-criteria="redCards" ts-default="descending" title="Tarjetas Rojas">TR</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="playerStats in playersCtrl.playerList track by playerStats.player.id"
+        ts-repeat
+      >
+      <td>{{playerStats.player.name}}</td>
+      <td ng-init="teams = playerStats.teams">
+        <a ui-sref="app.team({teamId: playerStats.lastTeam.id})">{{playerStats.lastTeam.name}}</a>
+        <span ng-if="teams.length > 1" ng-init="showAllTeams = false">
+          <button ng-click="showAllTeams = !showAllTeams"
+                  class="btn btn-link"
+                  style="padding: 0"
+                  title="Mostrar todos"
+            >({{showAllTeams ? '-' : '+'}})</button>
+          <span ng-show="showAllTeams">
+            <span ng-repeat="team in teams" ng-if="!$last">
+              <a ui-sref="app.team({teamId: team.id})">{{team.name}}</a>
+            </span>
+          </span>
+        </span>
+      </td>
+      <td>{{playerStats.goals}}</td>
+      <td>{{playerStats.bestPlayer}}</td>
+      <td>{{playerStats.yellowCards}}</td>
+      <td>{{playerStats.redCards}}</td>
+    </tr>
+    </tbody>
+  </table>
+</section>

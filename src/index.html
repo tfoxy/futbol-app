@@ -47,10 +47,13 @@
                 <a ui-sref="app.standings({divisionIndex:userData.divisionIndex})">Posiciones</a>
               </li>
               <li ui-sref-active="active">
-                <a ui-sref="app.matchesTable({divisionIndex:userData.divisionIndex})">Tabla de resultados</a>
+                <a ui-sref="app.matchesTable({divisionIndex:userData.divisionIndex})">Resultados</a>
               </li>
               <li ui-sref-active="active">
                 <a ui-sref="app.fixture({divisionIndex:userData.divisionIndex})">Fixture</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.players({divisionIndex:userData.divisionIndex})">Jugadores</a>
               </li>
             </ul>
             <div ui-view="divisionList"></div>
