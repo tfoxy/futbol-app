@@ -13,6 +13,8 @@ import matchModule from './match/match.module.js';
 import playersModule from './players/players.module.js';
 
 angular.module('futbolApp', [
+  'ngTouch',
+  'ngAria',
   'ui.router',
   'ui.router.title',
   userDataModule.name,
