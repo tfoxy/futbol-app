@@ -1,7 +1,7 @@
 class PlayerStatsUtil {
 
   addTeamStats(playerStatsById, teamStats) {
-    teamStats.players.forEach(player => {
+    teamStats.players && teamStats.players.forEach(player => {
       if (player.id in playerStatsById) {
         let playerStats = playerStatsById[player.id];
         let teamFound = playerStats.teams.find(team => team.id === teamStats.team.id);
