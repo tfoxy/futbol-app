@@ -5,19 +5,19 @@ function fillRootScope($rootScope, $state, $stateParams, $timeout, $document, us
   $rootScope.$stateParams = $stateParams;
   $rootScope.userData = userData;
 
-  var isExpandClicked = false;
+  let isExpandClicked = false;
   $rootScope.isCollapsed = true;
   $rootScope.collapse = function collapse() {
     $rootScope.isCollapsed = !$rootScope.isCollapsed;
     isExpandClicked = true;
   };
   $document.find('body').on('click', function bodyClickListener() {
-    if (!isExpandClicked) {
+    if (isExpandClicked) {
+      isExpandClicked = false;
+    } else {
       $rootScope.$apply(function() {
         $rootScope.isCollapsed = true;
       });
-    } else {
-      isExpandClicked = false;
     }
   });
 }
