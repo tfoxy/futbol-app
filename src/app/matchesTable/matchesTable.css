@@ -24,6 +24,21 @@
   #matches-table-view .table-responsive {
     overflow-x: inherit;
   }
+  /*
+  #matches-table-view {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  #matches-table-view .table-responsive {
+    overflow-x: inherit;
+    overflow-y: hidden;
+    margin-bottom: 0;
+  }
+
+  #matches-table-view table {
+    margin-left: 15px;
+  }*/
 
   #matches-table-view tbody > tr > th:first-child {
     border-left: 1px solid #ddd;
