@@ -7,7 +7,7 @@ function playersRouterConfig($stateProvider) {
     resolve: PlayersController.resolve,
     templateUrl: 'app/players/players.html',
     controller: 'PlayersController',
-    controllerAs: 'playersCtrl'
+    controllerAs: 'vm'
   });
 }
 

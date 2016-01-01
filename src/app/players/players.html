@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="playerStats in playersCtrl.playerList track by playerStats.player.id"
+    <tr ng-repeat="playerStats in vm.playerList track by playerStats.player.id"
         ts-repeat
       >
       <td>{{playerStats.player.name}}</td>

@@ -10,7 +10,7 @@ function matchPlayersTableDirective() {
     },
     templateUrl: 'app/match/matchPlayersTable.html',
     controller: MatchPlayersTableController,
-    controllerAs: 'matchPlayersTableCtrl',
+    controllerAs: 'vm',
     bindToController: true
   };
 }

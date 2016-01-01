@@ -8,7 +8,7 @@ function matchRouterConfig($stateProvider) {
     resolve: MatchController.resolve,
     templateUrl: 'app/match/match.html',
     controller: 'MatchController',
-    controllerAs: 'matchCtrl'
+    controllerAs: 'vm'
   });
 }
 

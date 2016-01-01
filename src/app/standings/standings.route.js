@@ -7,7 +7,7 @@ function standingsRouterConfig($stateProvider) {
     resolve: StandingsController.resolve,
     templateUrl: 'app/standings/standings.html',
     controller: 'StandingsController',
-    controllerAs: 'standingsCtrl'
+    controllerAs: 'vm'
   });
 }
 

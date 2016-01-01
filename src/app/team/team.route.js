@@ -8,7 +8,7 @@ function teamRouterConfig($stateProvider) {
     resolve: TeamController.resolve,
     templateUrl: 'app/team/team.html',
     controller: 'TeamController',
-    controllerAs: 'teamCtrl'
+    controllerAs: 'vm'
   });
 
   $stateProvider.state('app.team.match', {
@@ -26,7 +26,7 @@ function teamRouterConfig($stateProvider) {
       let dialog = ngDialog.open({
         template: 'app/match/match.html',
         controller: TeamMatchController,
-        controllerAs: 'matchCtrl'
+        controllerAs: 'vm'
       });
       dialog.closePromise.then(data => {
         // If data.value is undefined, it was closed programmatically

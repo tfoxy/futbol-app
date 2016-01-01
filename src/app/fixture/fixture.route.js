@@ -8,7 +8,7 @@ function fixtureRouterConfig($stateProvider) {
     resolve: FixtureController.resolve,
     templateUrl: 'app/fixture/fixture.html',
     controller: 'FixtureController',
-    controllerAs: 'fixtureCtrl'
+    controllerAs: 'vm'
   });
 
   $stateProvider.state('app.fixture.match', {
@@ -26,7 +26,7 @@ function fixtureRouterConfig($stateProvider) {
       let dialog = ngDialog.open({
         template: 'app/match/match.html',
         controller: FixtureMatchController,
-        controllerAs: 'matchCtrl'
+        controllerAs: 'vm'
       });
       dialog.closePromise.then(data => {
         // If data.value is undefined, it was closed programmatically

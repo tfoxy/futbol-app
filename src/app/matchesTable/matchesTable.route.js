@@ -8,7 +8,7 @@ function matchesTableRouterConfig($stateProvider, $urlRouterProvider) {
     resolve: MatchesTableController.resolve,
     templateUrl: 'app/matchesTable/matchesTable.html',
     controller: 'MatchesTableController',
-    controllerAs: 'matchesTableCtrl'
+    controllerAs: 'vm'
   });
 
   $urlRouterProvider.when('/matchesTable/{divisionIndex:[0-9]}', $stateParams => {

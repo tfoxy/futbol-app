@@ -11,7 +11,7 @@ function routerConfig($urlRouterProvider, $stateProvider, userData) {
         resolve: DivisionListController.resolve,
         templateUrl: 'app/divisionList/divisionList.html',
         controller: 'DivisionListController',
-        controllerAs: 'divisionListCtrl'
+        controllerAs: 'vm'
       }
     }
   });

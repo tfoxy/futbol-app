@@ -1,6 +1,6 @@
 <section id="team-view">
   <header class="page-header">
-    <h1>{{::teamCtrl.team.name}}</h1>
+    <h1>{{::vm.team.name}}</h1>
   </header>
 
   <section>
@@ -10,9 +10,9 @@
         <thead>
         <tr>
           <th>vs.</th>
-          <th title="Resultado ({{::teamCtrl.team.name}} - oponente)">Res</th>
-          <th title="Tarjetas Amarillas ({{::teamCtrl.team.name}} - oponente)">TA</th>
-          <th title="Tarjetas Rojas ({{::teamCtrl.team.name}} - oponente)">TR</th>
+          <th title="Resultado ({{::vm.team.name}} - oponente)">Res</th>
+          <th title="Tarjetas Amarillas ({{::vm.team.name}} - oponente)">TA</th>
+          <th title="Tarjetas Rojas ({{::vm.team.name}} - oponente)">TR</th>
           <th title="Jugador del partido">JdP</th>
           <th title="Número de fecha">#</th>
           <th>Fecha</th>
@@ -20,9 +20,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="match in ::teamCtrl.team.matchList"
-            ng-init="opponentStats = teamCtrl.getMatchOpponentStats(match);
-                   teamStats = teamCtrl.getMatchTeamStats(match);
+        <tr ng-repeat="match in ::vm.team.matchList"
+            ng-init="opponentStats = vm.getMatchOpponentStats(match);
+                   teamStats = vm.getMatchTeamStats(match);
                    opponentTeam = opponentStats.team;
                    bestPlayer = match.bestPlayer"
           >
@@ -56,7 +56,7 @@
           </td>
           <td>
           <span ng-if="::match.hasResults"
-                ng-class="::{'text-muted': !teamCtrl.isBestPlayerFromTeam(match)}"
+                ng-class="::{'text-muted': !vm.isBestPlayerFromTeam(match)}"
                 title="{{::bestPlayer.name.length > 17 ? bestPlayer.name : ''}}"
             >
             {{::bestPlayer.name.length > 17 ? (bestPlayer.name | limitTo: 16) + '&hellip;' : bestPlayer.name}}
@@ -80,7 +80,7 @@
   </section>
 
   <section>
-    <h2>Jugadores ({{::teamCtrl.playerList.length}})</h2>
+    <h2>Jugadores ({{::vm.playerList.length}})</h2>
     <table class="table table-striped" ts-wrapper>
       <thead>
       <tr>
@@ -92,7 +92,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="playerStats in teamCtrl.playerList track by playerStats.player.id" ts-repeat>
+      <tr ng-repeat="playerStats in vm.playerList track by playerStats.player.id" ts-repeat>
         <td>{{playerStats.player.name}}</td>
         <td>{{playerStats.goals}}</td>
         <td>{{playerStats.bestPlayer}}</td>

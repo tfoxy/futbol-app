@@ -6,13 +6,13 @@
         <th>
           <!-- Top left cell -->
         </th>
-        <th ng-repeat="standing in ::matchesTableCtrl.standings">
+        <th ng-repeat="standing in ::vm.standings">
           <div><span><a ui-sref="app.team({teamId: standing.team.id})">{{::standing.team.name}}</a></span></div>
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="rowStanding in ::matchesTableCtrl.standings"
+      <tr ng-repeat="rowStanding in ::vm.standings"
           ng-init="rowTeam = rowStanding.team">
         <th>
           <span title="{{::rowTeam.name.length > 17 ? rowTeam.name : ''}}">
@@ -21,15 +21,15 @@
             </a>
           </span>
         </th>
-        <td ng-repeat="columnStanding in ::matchesTableCtrl.standings"
+        <td ng-repeat="columnStanding in ::vm.standings"
             ng-init="columnTeam = columnStanding.team;
-                     match = matchesTableCtrl.getMatchByTeams(rowTeam, columnTeam)"
+                     match = vm.getMatchByTeams(rowTeam, columnTeam)"
             ng-class="::{'strike-through': rowTeam.id === columnTeam.id}"
           >
           <span ng-if="::rowTeam.id !== columnTeam.id && match.hasResults">
-            {{::matchesTableCtrl.getMatchGoalsByTeam(match, rowTeam)}}
+            {{::vm.getMatchGoalsByTeam(match, rowTeam)}}
             -
-            {{::matchesTableCtrl.getMatchGoalsByTeam(match, columnTeam)}}
+            {{::vm.getMatchGoalsByTeam(match, columnTeam)}}
           </span>
         </td>
       </tr>
