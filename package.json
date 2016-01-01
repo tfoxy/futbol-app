@@ -62,6 +62,7 @@
     "main-bower-files": "~2.9.0",
     "mocha": "^2.3.3",
     "ng-annotate-loader": "0.0.10",
+    "phantomjs": "^1.9.19",
     "phantomjs-polyfill": "0.0.1",
     "protractor-jasmine2-screenshot-reporter": "^0.1.7",
     "sinon": "^1.17.1",
