@@ -1,6 +1,6 @@
 'use strict';
 
-/* global require exports process browser */
+/* global require exports process browser console */
 
 const paths = require('./.yo-rc.json')['generator-gulp-angular'].props.paths;
 const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
