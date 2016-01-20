@@ -2,14 +2,13 @@ class MatchController {
 
   static get resolve() {
     return {
-      processedData: ['data', data => data.getProcessedData()],
-      match: (processedData, $stateParams) => {
+      match: ($stateParams, Match) => {
         'ngInject';
-        return processedData.matchesById[$stateParams.matchId];
+        return Match.get($stateParams.matchId);
       },
       $title: match => {
         'ngInject';
-        return `${match.local.team.name} vs. ${match.visitor.team.name} ${match.date}`;
+        return `${match.localStats.team.name} vs. ${match.visitorStats.team.name} ${match.startAt}`;
       }
     };
   }

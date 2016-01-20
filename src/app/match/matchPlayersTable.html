@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="player in ::vm.teamStats.players"
-        ng-init="playerStats = vm.teamStats.playerStatsById[player.id]"
+        ng-init="playerStats = vm.playerStatsById[player.id]"
       >
       <td ng-class="{'match-best-player': playerStats.isBestPlayer}">
         {{player.name}}

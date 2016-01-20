@@ -4,7 +4,7 @@ import MatchController from '../match/match.controller.js';
 function fixtureRouterConfig($stateProvider) {
   'ngInject';
   $stateProvider.state('app.fixture', {
-    url: '/fixture/{divisionIndex:[0-9]}',
+    url: '/fixture/division/:divisionIndex',
     resolve: FixtureController.resolve,
     templateUrl: 'app/fixture/fixture.html',
     controller: 'FixtureController',

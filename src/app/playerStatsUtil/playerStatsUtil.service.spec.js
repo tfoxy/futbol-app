@@ -150,8 +150,8 @@ describe(playerStatsUtilModule.name + '.service', () => {
 
       expect(addTeamStats).to.have.been.calledTwice;
       expect(addBestPlayer).to.have.been.calledOnce;
-      expect(addTeamStats).to.have.been.calledWith(playerStatsById, match.local);
-      expect(addTeamStats).to.have.been.calledWith(playerStatsById, match.visitor);
+      expect(addTeamStats).to.have.been.calledWith(playerStatsById, match.localStats);
+      expect(addTeamStats).to.have.been.calledWith(playerStatsById, match.visitorStats);
       expect(addBestPlayer).to.have.been.calledWith(playerStatsById, match.bestPlayer);
     });
 

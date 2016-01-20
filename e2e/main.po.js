@@ -36,7 +36,7 @@ function loadMockData() {
   browser.addMockModule('futbolAppDev', function(mockData) {
     angular.module('futbolAppDev', ['ngMockE2E'])
       .run(['$httpBackend', function($httpBackend) {
-        $httpBackend.whenGET('assets/data.json').respond(mockData);
+        $httpBackend.whenGET('api/seasonData/last.json').respond(mockData);
         $httpBackend.whenGET(/^app\//).passThrough();
       }]);
   }, mockData);

@@ -1,8 +1,8 @@
 export default standingsCalculator;
 
-function standingsCalculator(divisionData) {
-  let teams = divisionData.teams;
-  let rounds = divisionData.rounds;
+function standingsCalculator(division) {
+  let teams = division.teams;
+  let rounds = division.rounds;
   let standings = [];
   let standingsById = {};
 
@@ -44,9 +44,9 @@ function standingsCalculator(divisionData) {
         return;
       }
 
-      let localStanding = standingsById[match.local.team.id];
-      let visitorStanding = standingsById[match.visitor.team.id];
-      let diffGoals = match.visitor.goals.length - match.local.goals.length;
+      let localStanding = standingsById[match.localStats.team.id];
+      let visitorStanding = standingsById[match.visitorStats.team.id];
+      let diffGoals = match.visitorStats.goals.length - match.localStats.goals.length;
 
       if (diffGoals < 0) {
         localStanding.matchesWon++;
@@ -59,8 +59,8 @@ function standingsCalculator(divisionData) {
         visitorStanding.matchesDrawn++;
       }
 
-      countGoalsAndCards(localStanding, match.local, match.visitor);
-      countGoalsAndCards(visitorStanding, match.visitor, match.local);
+      countGoalsAndCards(localStanding, match.localStats, match.visitorStats);
+      countGoalsAndCards(visitorStanding, match.visitorStats, match.localStats);
     });
   });
 

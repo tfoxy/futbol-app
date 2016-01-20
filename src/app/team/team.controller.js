@@ -2,10 +2,9 @@ class TeamController {
 
   static get resolve() {
     return {
-      processedData: ['data', data => data.getProcessedData()],
-      team: (processedData, $stateParams) => {
+      team: ($stateParams, Team) => {
         'ngInject';
-        return processedData.teamsById[$stateParams.teamId];
+        return Team.get($stateParams.teamId);
       },
       $title: ['team', team => team.name]
     };
@@ -22,18 +21,18 @@ class TeamController {
   }
 
   getMatchOpponentStats(match) {
-    if (match.local.team.id !== this.team.id) {
-      return match.local;
-    } else if (match.visitor.team.id !== this.team.id) {
-      return match.visitor;
+    if (match.localStats.team.id !== this.team.id) {
+      return match.localStats;
+    } else if (match.visitorStats.team.id !== this.team.id) {
+      return match.visitorStats;
     }
   }
 
   getMatchTeamStats(match) {
-    if (match.local.team.id === this.team.id) {
-      return match.local;
-    } else if (match.visitor.team.id === this.team.id) {
-      return match.visitor;
+    if (match.localStats.team.id === this.team.id) {
+      return match.localStats;
+    } else if (match.visitorStats.team.id === this.team.id) {
+      return match.visitorStats;
     }
   }
 

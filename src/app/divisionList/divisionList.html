@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav navbar-right" ng-show="vm.stateHasDivisionIndexParam()">
   <li ng-repeat="division in vm.list"
-      ng-class="{active: division.index === vm.userData.divisionIndex}"
+      ng-class="{active: division.index === vm.userData.divisionIndex-1}"
     >
-    <a ng-href="{{vm.divisionHref(division.index)}}">{{division.name}}</a>
+    <a ng-href="{{vm.divisionHref(division.index+1)}}">{{division.name}}</a>
   </li>
 </ul>

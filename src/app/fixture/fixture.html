@@ -10,12 +10,12 @@
     <tbody ng-repeat-end>
     <tr ng-repeat="match in ::round.matches"> <!-- ng-click="::vm.showMatch(match)" class="cursor-pointer" -->
       <td class="col-sm-3 text-right">
-        <a ui-sref="app.team({teamId: match.local.team.id})">{{match.local.team.name}}</a>
+        <a ui-sref="app.team({teamId: match.localStats.team.id})">{{match.localStats.team.name}}</a>
       </td>
-      <td class="col-sm-1 text-center">{{match.local.goals.length+'' || '-'}}</td>
-      <td class="col-sm-1 text-center">{{match.visitor.goals.length+'' || '-'}}</td>
+      <td class="col-sm-1 text-center">{{match.localStats.goals.length+'' || '-'}}</td>
+      <td class="col-sm-1 text-center">{{match.visitorStats.goals.length+'' || '-'}}</td>
       <td class="col-sm-3">
-        <a ui-sref="app.team({teamId: match.visitor.team.id})">{{match.visitor.team.name}}</a>
+        <a ui-sref="app.team({teamId: match.visitor.team.id})">{{match.visitorStats.team.name}}</a>
       </td>
       <td class="col-sm-3 text-center">
         <a ui-sref=".match({matchId: match.id})">

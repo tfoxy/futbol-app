@@ -43,8 +43,8 @@ class PlayerStatsUtil {
   }
 
   addMatch(playerStatsById, match) {
-    this.addTeamStats(playerStatsById, match.local);
-    this.addTeamStats(playerStatsById, match.visitor);
+    this.addTeamStats(playerStatsById, match.localStats);
+    this.addTeamStats(playerStatsById, match.visitorStats);
     this.addBestPlayer(playerStatsById, match.bestPlayer);
   }
 

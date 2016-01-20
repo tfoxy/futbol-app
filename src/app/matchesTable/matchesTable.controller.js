@@ -2,10 +2,9 @@ class MatchesTableController {
 
   static get resolve() {
     return {
-      processedData: ['data', data => data.getProcessedData()],
-      division: (processedData, $stateParams) => {
+      division: ($stateParams, season) => {
         'ngInject';
-        return processedData.divisionsByIndex[$stateParams.divisionIndex];
+        return season.divisions[+$stateParams.divisionIndex - 1];
       },
       $title: ['division', division => 'Resultados ' + division.name]
     };
@@ -15,17 +14,17 @@ class MatchesTableController {
     'ngInject';
 
     this._matchesByTeams = division.matchesByTeams;
-    this.standings = division.standings;
+    this.standings = division.getStandings();
 
     // Sync userData.divisionIndex
     userData.divisionIndex = +$stateParams.divisionIndex;
   }
 
   getMatchGoalsByTeam(match, team) {
-    if (team.id === match.local.team.id) {
-      return match.local.goals.length;
-    } else if (team.id === match.visitor.team.id) {
-      return match.visitor.goals.length;
+    if (team.id === match.localStats.team.id) {
+      return match.localStats.goals.length;
+    } else if (team.id === match.visitorStats.team.id) {
+      return match.visitorStats.goals.length;
     }
   }
 

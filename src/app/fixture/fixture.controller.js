@@ -2,10 +2,9 @@ class FixtureController {
 
   static get resolve() {
     return {
-      processedData: ['data', data => data.getProcessedData()],
-      division: (processedData, $stateParams) => {
+      division: ($stateParams, season) => {
         'ngInject';
-        return processedData.divisionsByIndex[$stateParams.divisionIndex];
+        return season.divisions[+$stateParams.divisionIndex - 1];
       },
       $title: ['division', division => 'Fixture ' + division.name]
     };

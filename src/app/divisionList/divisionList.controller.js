@@ -1,22 +1,15 @@
 class DivisionListController {
-
-  static get resolve() {
-    return {
-      processedData: ['data', data => data.getProcessedData()],
-      divisions: ['processedData', processedData => processedData.lastSeason.divisions]
-    };
-  }
-
-  constructor(divisions, $state, userData) {
+  constructor(season, $state, userData) {
     'ngInject';
 
-    this.list = divisions;
+    this.list = season.divisions;
     this.$state = $state;
     this.userData = userData;
   }
 
   divisionHref(divisionIndex) {
-    return this.$state.href(this.$state.current.name, {divisionIndex});
+    let seasonId = this.$state.params.seasonId;
+    return this.$state.href(this.$state.current.name, {seasonId, divisionIndex});
   }
 
   stateHasDivisionIndexParam() {

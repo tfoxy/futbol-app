@@ -44,16 +44,16 @@
           <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
             <ul class="nav navbar-nav">
               <li ui-sref-active="active">
-                <a ui-sref="app.standings({divisionIndex:userData.divisionIndex})">Posiciones</a>
+                <a ui-sref="app.standings({seasonId:userData.seasonId, divisionIndex:userData.divisionIndex})">Posiciones</a>
               </li>
               <li ui-sref-active="active">
-                <a ui-sref="app.matchesTable({divisionIndex:userData.divisionIndex})">Resultados</a>
+                <a ui-sref="app.matchesTable({seasonId:userData.seasonId, divisionIndex:userData.divisionIndex})">Resultados</a>
               </li>
               <li ui-sref-active="active">
-                <a ui-sref="app.fixture({divisionIndex:userData.divisionIndex})">Fixture</a>
+                <a ui-sref="app.fixture({seasonId:userData.seasonId, divisionIndex:userData.divisionIndex})">Fixture</a>
               </li>
               <li ui-sref-active="active">
-                <a ui-sref="app.players({divisionIndex:userData.divisionIndex})">Jugadores</a>
+                <a ui-sref="app.players({seasonId:userData.seasonId, divisionIndex:userData.divisionIndex})">Jugadores</a>
               </li>
             </ul>
             <div ui-view="divisionList"></div>

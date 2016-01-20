@@ -9,21 +9,21 @@
     <tr>
       <td class="text-center col-sm-5">
         <strong>
-          <a ui-sref="app.team({teamId: match.local.team.id})">
-            {{::match.local.team.name}}
+          <a ui-sref="app.team({teamId: match.localStats.team.id})">
+            {{::match.localStats.team.name}}
           </a>
         </strong>
       </td>
       <td class="text-center col-sm-1">
-        {{::match.local.goals ? match.local.goals.length : '-'}}
+        {{::match.localStats.goals ? match.localStats.goals.length : '-'}}
       </td>
       <td class="text-center col-sm-1">
-        {{::match.visitor.goals ? match.visitor.goals.length : '-'}}
+        {{::match.visitorStats.goals ? match.visitorStats.goals.length : '-'}}
       </td>
       <td class="text-center col-sm-5">
         <strong>
           <a ui-sref="app.team({teamId: match.visitor.team.id})">
-            {{::match.visitor.team.name}}
+            {{::match.visitorStats.team.name}}
           </a>
         </strong>
       </td>
@@ -31,7 +31,7 @@
   </thead>
   <tbody>
     <tr>
-      <td colspan="2" match-players-table="::match.local" class="col-sm-6"></td>
+      <td colspan="2" match-players-table="::match.localStats" class="col-sm-6"></td>
       <td colspan="2" match-players-table="::match.visitor" class="col-sm-6"></td>
     </tr>
   </tbody>
