@@ -1,18 +1,16 @@
 import matchesTableModule from './matchesTable.module.js';
 
 describe(matchesTableModule.name + '.controller', () => {
-  let controller, matchesByTeams, standings;
+  let controller, division;
 
   beforeEach(angular.mock.module(matchesTableModule.name));
 
-  beforeEach(inject(($controller) => {
-    matchesByTeams = {};
-    standings = {};
+  beforeEach(inject(($controller, Division) => {
+    division = Division.inject({
+      id: 1
+    });
     controller = $controller('MatchesTableController', {
-      division: {
-        matchesByTeams,
-        standings
-      }
+      division
     });
   }));
 
@@ -23,11 +21,11 @@ describe(matchesTableModule.name + '.controller', () => {
         id: 1
       };
       let match = {
-        local: {
+        localStats: {
           team: team,
           goals: [{}]
         },
-        visitor: {
+        visitorStats: {
           team: {id: 2},
           goals: []
         }
@@ -41,11 +39,11 @@ describe(matchesTableModule.name + '.controller', () => {
         id: 1
       };
       let match = {
-        local: {
+        localStats: {
           team: {id: 2},
           goals: [{}]
         },
-        visitor: {
+        visitorStats: {
           team: team,
           goals: []
         }
@@ -63,15 +61,15 @@ describe(matchesTableModule.name + '.controller', () => {
       let visitorTeam = {id: 2};
       let match = {
         id: 3,
-        local: {
+        localStats: {
           team: localTeam
         },
-        visitor: {
+        visitorStats: {
           team: visitorTeam
         }
       };
 
-      matchesByTeams[1] = {2: match};
+      division.matchesByTeams[1] = {2: match};
 
       let returnedMatch = controller.getMatchByTeams(localTeam, visitorTeam);
 

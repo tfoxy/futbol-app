@@ -7,9 +7,9 @@ function divisionFactory(DS, playerStatsUtil) {
 
   return DS.defineResource({
     name: 'division',
-    afterInject: afterInject,
+    afterInject,
     methods: {
-      getStandings: getStandings
+      getStandings
     },
     relations: {
       hasMany: {

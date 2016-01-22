@@ -18,12 +18,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [],
             cards: []
@@ -41,12 +41,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [],
             cards: []
@@ -64,12 +64,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [],
             cards: []
@@ -87,12 +87,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: new Array(5),
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: new Array(2),
             cards: []
@@ -113,12 +113,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [1],
             cards: []
@@ -137,12 +137,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1, 2],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [1],
             cards: []
@@ -161,12 +161,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [],
             cards: []
@@ -185,12 +185,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 4},
             goals: [1],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 3},
             goals: [],
             cards: []
@@ -209,24 +209,24 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: new Array(8),
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 5},
             goals: new Array(6),
             cards: []
           }
         }, {
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 4},
             goals: new Array(5),
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 5},
             goals: new Array(2),
             cards: []
@@ -241,49 +241,49 @@ describe(dataModule.name + '.standingsCalculator', () => {
   });
 
   it('should order by goalsScored when both teams have' +
-      ' the same points and goals difference', () => {
-        let standings = standingsCalculator({
-          rounds: [{
-            matches: [{
-              hasResults: true,
-              local: {
-                team: {id: 3},
-                goals: new Array(5),
-                cards: []
-              },
-              visitor: {
-                team: {id: 5},
-                goals: new Array(3),
-                cards: []
-              }
-            }, {
-              hasResults: true,
-              local: {
-                team: {id: 4},
-                goals: new Array(8),
-                cards: []
-              },
-              visitor: {
-                team: {id: 5},
-                goals: new Array(6),
-                cards: []
-              }
-            }]
-          }],
-          teams: [{id: 3}, {id: 4}, {id: 5}]
-        });
+  ' the same points and goals difference', () => {
+    let standings = standingsCalculator({
+      rounds: [{
+        matches: [{
+          hasResults: true,
+          localStats: {
+            team: {id: 3},
+            goals: new Array(5),
+            cards: []
+          },
+          visitorStats: {
+            team: {id: 5},
+            goals: new Array(3),
+            cards: []
+          }
+        }, {
+          hasResults: true,
+          localStats: {
+            team: {id: 4},
+            goals: new Array(8),
+            cards: []
+          },
+          visitorStats: {
+            team: {id: 5},
+            goals: new Array(6),
+            cards: []
+          }
+        }]
+      }],
+      teams: [{id: 3}, {id: 4}, {id: 5}]
+    });
 
-        expect(standings[0]).to.have.deep.property('team.id', 4);
-        expect(standings[1]).to.have.deep.property('team.id', 3);
-      });
+    expect(standings[0]).to.have.deep.property('team.id', 4);
+    expect(standings[1]).to.have.deep.property('team.id', 3);
+  });
 
   it('should skip a match where hasResults is false', () => {
     let standings = standingsCalculator({
       rounds: [{
         matches: [{
           hasResults: false,
-          local: {team: {id: 3}},
-          visitor: {team: {id: 4}}
+          localStats: {team: {id: 3}},
+          visitorStats: {team: {id: 4}}
         }]
       }],
       teams: [{id: 3}, {id: 4}]
@@ -298,12 +298,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [1],
             cards: []
@@ -330,36 +330,36 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [],
             cards: []
           }
         }, {
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 5},
             goals: [],
             cards: []
           }
         }, {
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [1],
             cards: []
@@ -377,12 +377,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: new Array(3),
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: new Array(5),
             cards: []
@@ -401,12 +401,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1],
             cards: [{type: 'yellow'}, {type: 'red'}, {type: 'yellow'}]
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [],
             cards: []
@@ -424,12 +424,12 @@ describe(dataModule.name + '.standingsCalculator', () => {
       rounds: [{
         matches: [{
           hasResults: true,
-          local: {
+          localStats: {
             team: {id: 3},
             goals: [1],
             cards: [{type: 'yellow'}, {type: 'red'}, {type: 'yellow'}]
           },
-          visitor: {
+          visitorStats: {
             team: {id: 4},
             goals: [],
             cards: []

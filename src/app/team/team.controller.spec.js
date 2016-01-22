@@ -16,10 +16,10 @@ describe(teamModule.name + '.controller', () => {
 
     it('should return the visitor team stats if team is local', () => {
       let match = {
-        local: {
+        localStats: {
           team: {id: 7}
         },
-        visitor: {
+        visitorStats: {
           team: team
         }
       };
@@ -29,10 +29,10 @@ describe(teamModule.name + '.controller', () => {
 
     it('should return the local team stats if team is visitor', () => {
       let match = {
-        local: {
+        localStats: {
           team: team
         },
-        visitor: {
+        visitorStats: {
           team: {id: 7}
         }
       };
@@ -46,10 +46,10 @@ describe(teamModule.name + '.controller', () => {
 
     it('should return the local team stats if team is local', () => {
       let match = {
-        local: {
+        localStats: {
           team: {id: 7}
         },
-        visitor: {
+        visitorStats: {
           team: team
         }
       };
@@ -59,10 +59,10 @@ describe(teamModule.name + '.controller', () => {
 
     it('should return the visitor team stats if team is visitor', () => {
       let match = {
-        local: {
+        localStats: {
           team: team
         },
-        visitor: {
+        visitorStats: {
           team: {id: 7}
         }
       };
@@ -77,11 +77,11 @@ describe(teamModule.name + '.controller', () => {
     it('should return true if best player is in the team', () => {
       let match = {
         bestPlayer: {id: 3},
-        local: {
+        localStats: {
           team: {id: 7},
           players: [{id: 5}]
         },
-        visitor: {
+        visitorStats: {
           team: team,
           players: [{id: 9}, {id: 3}, {id: 11}]
         }
@@ -93,11 +93,11 @@ describe(teamModule.name + '.controller', () => {
     it('should return false if best player is not in the team', () => {
       let match = {
         bestPlayer: {id: 3},
-        local: {
+        localStats: {
           team: team,
           players: [{id: 5}]
         },
-        visitor: {
+        visitorStats: {
           team: {id: 7},
           players: [{id: 3}]
         }
@@ -108,11 +108,11 @@ describe(teamModule.name + '.controller', () => {
 
     it('should return false if there is no best player', () => {
       let match = {
-        local: {
+        localStats: {
           team: team,
           players: [{id: 5}]
         },
-        visitor: {
+        visitorStats: {
           team: {id: 7},
           players: [{id: 3}]
         }
@@ -134,7 +134,7 @@ describe(teamModule.name + '.controller', () => {
         {
           hasResults: true,
           bestPlayer: {id: 3},
-          local: {
+          localStats: {
             team: team,
             players: [{id: 3}],
             goals: [{player: {id: 3}}, {player: {id: 3}}],
@@ -144,7 +144,7 @@ describe(teamModule.name + '.controller', () => {
               {type: 'red', player: {id: 3}}
             ]
           },
-          visitor: {
+          visitorStats: {
             team: {id: 7},
             players: []
           }
@@ -164,13 +164,13 @@ describe(teamModule.name + '.controller', () => {
       team.matchList = [
         {
           hasResults: true,
-          local: {
+          localStats: {
             team: team,
             players: [{id: 3}, {id: 5}, {id: 9}],
             goals: [{player: {id: 5}}, {player: {id: 5}}, {player: {id: 3}}],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 7},
             players: []
           }
@@ -188,13 +188,13 @@ describe(teamModule.name + '.controller', () => {
         {
           hasResults: true,
           bestPlayer: {id: 5},
-          local: {
+          localStats: {
             team: team,
             players: [{id: 3}, {id: 5}, {id: 9}],
             goals: [],
             cards: []
           },
-          visitor: {
+          visitorStats: {
             team: {id: 7},
             players: []
           }
@@ -210,11 +210,11 @@ describe(teamModule.name + '.controller', () => {
       team.matchList = [
         {
           hasResults: false,
-          local: {
+          localStats: {
             team: team,
             players: [{id: 3}]
           },
-          visitor: {
+          visitorStats: {
             team: {id: 7},
             players: []
           }

@@ -3,9 +3,9 @@ export default matchFactory;
 function matchFactory($timeout, DS, playerStatsUtil) {
   'ngInject';
 
-  return DS.defineResource({
+  const Match = DS.defineResource({
     name: 'match',
-    afterInject: afterInject,
+    afterInject,
     relations: {
       hasOne: {
         player: {
@@ -29,6 +29,14 @@ function matchFactory($timeout, DS, playerStatsUtil) {
       }
     }
   });
+
+  Match._helpers = {
+    generateMatchesByTeams,
+    generateTeamMatchList,
+    generatePlayerStatsPerDivision
+  };
+
+  return Match;
 
 
   function afterInject(resource, match) {

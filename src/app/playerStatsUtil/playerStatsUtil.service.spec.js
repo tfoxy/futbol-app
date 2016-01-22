@@ -145,7 +145,7 @@ describe(playerStatsUtilModule.name + '.service', () => {
       let addTeamStats = playerStatsUtil.addTeamStats = sinon.spy();
       let addBestPlayer = playerStatsUtil.addBestPlayer = sinon.spy();
       let playerStatsById = {};
-      let match = {local: {team: {id: 1}}, visitor: {team: {id: 2}}, bestPlayer: {id: 3}};
+      let match = {localStats: {team: {id: 1}}, visitorStats: {team: {id: 2}}, bestPlayer: {id: 3}};
       playerStatsUtil.addMatch(playerStatsById, match);
 
       expect(addTeamStats).to.have.been.calledTwice;
