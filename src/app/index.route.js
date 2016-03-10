@@ -9,9 +9,10 @@ function routerConfig($urlRouterProvider, $stateProvider, userData) {
     url: '/season/{seasonId:[a-zA-Z0-9]+}',
     abstract: true,
     resolve: {
-      seasonData: ($stateParams, SeasonData) => {
+      seasonData: ($timeout, $stateParams, SeasonData) => {
         'ngInject';
-        return SeasonData.find($stateParams.seasonId);
+        // Wait for the execution of all angular run functions before making the request
+        return $timeout(() => SeasonData.find($stateParams.seasonId));
       },
       season: (seasonData) => {
         'ngInject';

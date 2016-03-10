@@ -4,19 +4,29 @@
     "id": 1,
     "startOn": "22/08/15",
     "endOn": "05/12/15",
-    "name": "Apertura 2015"
+    "name": "Season 2015"
   },
   "divisions": [{
     "id": 1,
     "index": 0,
-    "name": "Primera división",
+    "name": "First division",
     "seasonId": 1,
-    "teamIds": [1, 2]
+    "teamIds": [1, 2, 3]
+  }, {
+    "id": 2,
+    "index": 1,
+    "name": "Second division",
+    "seasonId": 1,
+    "teamIds": [4, 5]
   }],
   "rounds": [{
     "id": 1,
     "index": 0,
     "divisionId": 1
+  }, {
+    "id": 2,
+    "index": 0,
+    "divisionId": 2
   }],
   "matches": [{
     "id": 1,
@@ -42,10 +52,19 @@
   }],
   "teams": [{
     "id": 1,
-    "name": "fooTeam1"
+    "name": "WorstTeam"
   }, {
     "id": 2,
-    "name": "fooTeam2"
+    "name": "BestTeam"
+  }, {
+    "id": 3,
+    "name": "RegularTeam"
+  }, {
+    "id": 4,
+    "name": "Onions"
+  }, {
+    "id": 5,
+    "name": "Lettuces"
   }],
   "players": [{
     "id": 1,
@@ -56,8 +75,8 @@
   }],
   "goals": [{
     "id": 1,
-    "matchTeamStatsId": 1,
-    "playerId": 1
+    "matchTeamStatsId": 2,
+    "playerId": 2
   }],
   "cards": [{
     "id": 1,

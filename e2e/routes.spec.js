@@ -4,10 +4,20 @@ describe('Router', () => {
   const page = require('./main.po');
 
   afterEach(function() {
-    browser.manage().logs().get('browser').then(function(browserLogs) {
+    return browser.manage().logs().get('browser').then(function(browserLogs) {
       browserLogs.forEach(function(log) {
+        // logs with a level value >= 1000 are errors
         if (log.level.value >= 1000) {
-          console.error('error: ' + require('util').inspect(log.message, {colors: true}));
+          // '\x1b[31m' is for color red
+          // '\x1b[37m' is for color gray
+          // '\x1b[0m' is for resetting color
+          let lines = log.message.split('\n');
+          let firstLine = lines.shift();
+          let otherLines = lines.join('\n');
+          console.error('\x1b[31m' + firstLine + '\x1b[0m');
+          if (otherLines.length > 0) {
+            console.error('\x1b[37m' + otherLines + '\x1b[0m');
+          }
         }
       });
     });

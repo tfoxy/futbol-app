@@ -9,7 +9,7 @@ const browserSyncSpa = require('browser-sync-spa');
 
 const util = require('util');
 
-function browserSyncInit(baseDir, browser) {
+function browserSyncInit(baseDir, browser, testing) {
   browser = browser === undefined ? 'default' : browser;
 
   let routes = null;
@@ -37,7 +37,8 @@ function browserSyncInit(baseDir, browser) {
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,
-    browser: browser
+    browser: browser,
+    notify: !testing
   });
 }
 
@@ -54,9 +55,9 @@ gulp.task('serve:dist', ['build'], () => {
 });
 
 gulp.task('serve:e2e', ['inject'], () => {
-  browserSyncInit([conf.paths.tmp + '/serve', conf.paths.src], []);
+  browserSyncInit([conf.paths.tmp + '/serve', conf.paths.src], [], true);
 });
 
 gulp.task('serve:e2e-dist', ['build'], () => {
-  browserSyncInit(conf.paths.dist, []);
+  browserSyncInit(conf.paths.dist, [], true);
 });
