@@ -1,5 +1,11 @@
 'use strict';
 
+require('mocha-generators').install();
+
+const chai = require('chai');
+const expect = chai.expect;
+chai.use(require('chai-string'));
+
 describe('Router', () => {
   const page = require('./main.po');
 
@@ -46,21 +52,21 @@ describe('Router', () => {
     it('should change the url when using the navbar', navigateRoutes);
   });
 
-  function navigateRoutes() {
-    page.nav.fixtureEl.click();
-    expect(browser.getCurrentUrl()).toMatch(/#\/season\/last\/fixture\/division\/1/);
-    page.nav.resultsTableEl.click();
-    expect(browser.getCurrentUrl()).toMatch(/#\/season\/last\/results\/division\/1/);
-    page.nav.divisionsEls.get(1).click();
-    expect(browser.getCurrentUrl()).toMatch(/#\/season\/last\/results\/division\/2/);
-    page.nav.standingsEl.click();
-    expect(browser.getCurrentUrl()).toMatch(/#\/season\/last\/standings\/division\/2/);
-    page.nav.fixtureEl.click();
-    expect(browser.getCurrentUrl()).toMatch(/#\/season\/last\/fixture\/division\/2/);
-    page.nav.divisionsEls.get(0).click();
-    expect(browser.getCurrentUrl()).toMatch(/#\/season\/last\/fixture\/division\/1/);
-    page.nav.playersEl.click();
-    expect(browser.getCurrentUrl()).toMatch(/#\/season\/last\/players\/division\/1/);
+  function * navigateRoutes() {
+    yield page.nav.fixtureEl.click();
+    expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/fixture/division/1');
+    yield page.nav.resultsTableEl.click();
+    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/results/division/1');
+    yield page.nav.divisionsEls.get(1).click();
+    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/results/division/2');
+    yield page.nav.standingsEl.click();
+    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/standings/division/2');
+    yield page.nav.fixtureEl.click();
+    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/fixture/division/2');
+    yield page.nav.divisionsEls.get(0).click();
+    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/fixture/division/1');
+    yield page.nav.playersEl.click();
+    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/players/division/1');
   }
 
 });

@@ -2,11 +2,10 @@
 
 /* global require exports process browser console */
 
-const paths = require('./.yo-rc.json')['generator-gulp-angular'].props.paths;
-const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
-const hat = require('hat');
-const SpecReporter = require('jasmine-spec-reporter');
+const path = require('path');
 
+const paths = require('./.yo-rc.json')['generator-gulp-angular'].props.paths;
+const screenshotsFolder = '.tmp/screenshots';
 
 let config = {
   // The address of a running selenium server.
@@ -28,41 +27,47 @@ let config = {
   // protractor is called.
   specs: [paths.e2e + '/**/*.js'],
 
-  framework: 'jasmine2',
-
-  // Options to be passed to Jasmine-node.
-  jasmineNodeOpts: {
-    showColors: true,
-    defaultTimeoutInterval: 30000,
-    // Remove protractor dot reporter
-    print: () => {}
+  framework: 'mocha',
+  mochaOpts: {
+    timeout: 30000,
+    slow: 3000
   },
 
   onPrepare: () => {
-    if (!process.env.TRAVIS) {
-      jasmine.getEnv().addReporter(new HtmlScreenshotReporter({
-        dest: '.tmp/screenshots',
-        captureOnlyFailedSpecs: true,
-        pathBuilder: function() {
-          return '.' + hat();
-        }
-      }));
-    }
-
-    // add jasmine spec reporter
-    jasmine.getEnv().addReporter(new SpecReporter({
-      displayStacktrace: 'all',
-      displaySpecDuration: true
-    }));
-
     // Avoid "angular could not be found on the window" error
     browser.driver.manage().window().maximize();
     return browser.get('/index.html');
+  },
+
+  onCleanUp: function(statusCode) {
+    if (statusCode) {
+      console.log('ERROR SCREENSHOTS FOLDER: ' + fileUrl(screenshotsFolder));
+    }
   }
 };
 
 if (process.env.TRAVIS) {
   config.capabilities.chromeOptions.args.push('--no-sandbox');
+} else {
+  process.env.PROSHOT_DIR = screenshotsFolder;
+  process.env.multi = 'spec=- mocha-proshot=-';
+  config.mochaOpts.reporter = 'mocha-multi';
 }
 
 exports.config = config;
+
+
+function fileUrl(str) {
+  if (typeof str !== 'string') {
+    throw new Error('Expected a string');
+  }
+
+  let pathName = path.resolve(str).replace(/\\/g, '/');
+
+  // Windows drive letter must be prefixed with a slash
+  if (pathName[0] !== '/') {
+    pathName = '/' + pathName;
+  }
+
+  return encodeURI('file://' + pathName);
+}
