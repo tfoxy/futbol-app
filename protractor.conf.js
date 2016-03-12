@@ -30,7 +30,7 @@ let config = {
   framework: 'mocha',
   mochaOpts: {
     timeout: 30000,
-    slow: 3000
+    slow: 4000
   },
 
   onPrepare: () => {
@@ -41,7 +41,11 @@ let config = {
 
   onCleanUp: function(statusCode) {
     if (statusCode) {
-      console.log('ERROR SCREENSHOTS FOLDER: ' + fileUrl(screenshotsFolder));
+      console.log(
+        '\x1b[95mERROR SCREENSHOTS FOLDER: ' +
+        fileUrl(screenshotsFolder) +
+        '\x1b[0m'
+      );
     }
   }
 };

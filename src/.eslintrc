@@ -1,0 +1,10 @@
+{
+  "extends": "../.eslintrc",
+  "plugins": ["angular"],
+  "env": {
+    "browser": true,
+    "node": false,
+    "mocha": false,
+    "jasmine": false
+  }
+}

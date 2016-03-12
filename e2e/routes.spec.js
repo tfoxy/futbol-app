@@ -11,6 +11,7 @@ describe('Router', () => {
 
   afterEach(function() {
     return browser.manage().logs().get('browser').then(function(browserLogs) {
+      let fullErrorLog = '';
       browserLogs.forEach(function(log) {
         // logs with a level value >= 1000 are errors
         if (log.level.value >= 1000) {
@@ -20,12 +21,15 @@ describe('Router', () => {
           let lines = log.message.split('\n');
           let firstLine = lines.shift();
           let otherLines = lines.join('\n');
-          console.error('\x1b[31m' + firstLine + '\x1b[0m');
+          fullErrorLog += '\n\x1b[31m' + firstLine + '\x1b[0m';
           if (otherLines.length > 0) {
-            console.error('\x1b[37m' + otherLines + '\x1b[0m');
+            fullErrorLog += '\n\x1b[37m' + otherLines + '\x1b[0m';
           }
         }
       });
+      if (fullErrorLog) {
+        throw new Error('Browser console errors:' + fullErrorLog);
+      }
     });
   });
 
@@ -33,7 +37,7 @@ describe('Router', () => {
     beforeEach(function() {
       page.loadMockData();
       return page.navigate().then(function() {
-        console.log('NAVIGATED');
+        console.log('1st beforeEach');
       });
     });
 
@@ -56,17 +60,17 @@ describe('Router', () => {
     yield page.nav.fixtureEl.click();
     expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/fixture/division/1');
     yield page.nav.resultsTableEl.click();
-    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/results/division/1');
+    expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/results/division/1');
     yield page.nav.divisionsEls.get(1).click();
-    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/results/division/2');
+    expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/results/division/2');
     yield page.nav.standingsEl.click();
-    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/standings/division/2');
+    expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/standings/division/2');
     yield page.nav.fixtureEl.click();
-    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/fixture/division/2');
+    expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/fixture/division/2');
     yield page.nav.divisionsEls.get(0).click();
-    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/fixture/division/1');
+    expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/fixture/division/1');
     yield page.nav.playersEl.click();
-    expect(yield browser.getCurrentUrl()).to.endsWith('/season/last/players/division/1');
+    expect(yield browser.getCurrentUrl()).to.endsWith('#/season/last/players/division/1');
   }
 
 });

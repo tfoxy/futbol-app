@@ -26,7 +26,7 @@
                      match = vm.getMatchByTeams(rowTeam, columnTeam)"
             ng-class="::{'strike-through': rowTeam.id === columnTeam.id}"
           >
-          <span ng-if="::rowTeam.id !== columnTeam.id && match.hasResults">
+          <span ng-if="::match && match.hasResults">
             {{::vm.getMatchGoalsByTeam(match, rowTeam)}}
             -
             {{::vm.getMatchGoalsByTeam(match, columnTeam)}}

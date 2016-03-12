@@ -29,7 +29,8 @@ class MatchesTableController {
   }
 
   getMatchByTeams(leftTeam, rightTeam) {
-    return this._matchesByTeams[leftTeam.id][rightTeam.id];
+    let matches = this._matchesByTeams[leftTeam.id];
+    return matches ? matches[rightTeam.id] : null;
   }
 }
 
