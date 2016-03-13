@@ -6,19 +6,23 @@ const gulp = require('gulp');
 const karma = require('karma');
 
 function runTests(singleRun, done) {
-  karma.server.start({
+
+  let localConfig = {
     configFile: path.join(__dirname, '/../karma.conf.js'),
     singleRun: singleRun,
     autoWatch: !singleRun
-  }, function(failCount) {
+  };
+
+  let server = new karma.Server(localConfig, function(failCount) {
     done(failCount ? new Error('Failed ' + failCount + ' tests.') : null);
   });
+  server.start();
 }
 
-gulp.task('test', ['scripts:test'], (done) => {
+gulp.task('test', ['scripts:test'], function(done) {
   runTests(true, done);
 });
 
-gulp.task('test:auto', ['scripts:test-watch'], (done) => {
+gulp.task('test:auto', ['scripts:test-watch'], function(done) {
   runTests(false, done);
 });

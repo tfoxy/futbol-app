@@ -12,7 +12,7 @@ import fixtureModule from './fixture/fixture.module.js';
 import matchModule from './match/match.module.js';
 import playersModule from './players/players.module.js';
 
-angular.module('futbolApp', [
+export default angular.module('futbolApp', [
   'ngTouch',
   'ngAria',
   'ui.router',
