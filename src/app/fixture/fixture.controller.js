@@ -1,11 +1,10 @@
+import {resolveDivision} from '../util';
+
 class FixtureController {
 
   static get resolve() {
     return {
-      division: ($stateParams, season) => {
-        'ngInject';
-        return season.divisions[+$stateParams.divisionIndex - 1];
-      },
+      division: resolveDivision,
       $title: ['division', division => 'Fixture ' + division.name]
     };
   }

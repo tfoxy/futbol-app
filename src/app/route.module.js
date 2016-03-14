@@ -1,3 +1,16 @@
+import userDataModule from './userData/userData.module.js';
+import divisionListModule from './divisionList/divisionList.module.js';
+import dataModule from './data/data.module.js';
+
+export default angular.module('futbolApp.route', [
+  'ui.router',
+  'ui.router.title',
+  userDataModule.name,
+  divisionListModule.name,
+  dataModule.name
+])
+  .config(routerConfig);
+
 function routerConfig($urlRouterProvider, $stateProvider, userData) {
   'ngInject';
 
@@ -28,5 +41,3 @@ function routerConfig($urlRouterProvider, $stateProvider, userData) {
     }
   });
 }
-
-export default routerConfig;

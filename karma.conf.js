@@ -51,8 +51,7 @@ module.exports = function(config) {
     autoWatch: false,
 
     ngHtml2JsPreprocessor: {
-      stripPrefix: conf.paths.src + '/',
-      moduleName: 'futbolApp'
+      stripPrefix: conf.paths.src + '/'
     },
 
     logLevel: config.LOG_INFO,
